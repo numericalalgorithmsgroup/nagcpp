@@ -1,0 +1,15 @@
+#!/bin/sh -u
+# Calls the command-line Intel C compiler.
+
+# Convert /cygdrive/d to d:, etc.
+args=`echo $* | sed -e 's%/cygdrive/\(.\)/%\1:/%g'`
+
+quiet=`echo ${args} | grep -c -e "-quiet"`
+
+if [ "${quiet}" = "0" ]; then
+  echo icl ${args}
+else
+  args=`echo " ${args} " | sed -e 's/ *-quiet *//'`
+fi
+
+icl ${args}
