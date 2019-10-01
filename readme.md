@@ -19,6 +19,13 @@ process out across the whole library.
 * [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp)
 * [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp)
 * [handle_solve_socp_ipm (e04pt)](./examples/ex_e04pt.cpp)
+* [handle_solve_ipopt (e04st)](./examples/ex_e04st.cpp)
+* [nlp1_solve (e04uc)](./examples/ex_e04uc.cpp)
+* [real_nmf_rcomm (f01sb)](./examples/ex_f01sb.cpp)
+* [quantiles (g01am)](./examples/ex_g01am.cpp)
+* [prob_students_t_noncentral](./examples/ex_g01gb.cpp)
+* [corrmat_nearest_rank (g02ak)](./examples/ex_g02ak.cpp)
+* [lars (g02ma)](./examples/ex_g02ma.cpp)
 
 ## Quickstart using NLL6I27DBL for Linux
 
