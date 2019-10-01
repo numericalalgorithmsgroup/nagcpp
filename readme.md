@@ -13,11 +13,11 @@ process out across the whole library.
 
 * [contfn_brent (c05ay)](./examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
 * [md_gauss (d01fb)](./examples/ex_d01fb.cpp) - computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
-* [dim1_spline (e01ba)](./examples/ex_e01ba.cpp)
-* [dim1_spline_eval (e02bb)](./examples/ex_e02bb.cpp)
-* [handle_solve_dfls_rcomm (e04fg)](./examples/ex_e04fg_boost.cpp)
-* [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp)
-* [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp)
+* [dim1_spline (e01ba)](./examples/ex_e01ba.cpp) - determines a cubic spline interpolant to a given set of data.
+* [dim1_spline_eval (e02bb)](./examples/ex_e02bb.cpp) - evaluates a cubic spline from its B-spline representation.
+* [handle_solve_dfls_rcomm (e04fg)](./examples/ex_e04fg_boost.cpp) -  a reverse communication Derivative-free Optimization (DFO) solver  for small to medium-scale nonlinear least squares problems with bound constraints.
+* [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp) - solver for bound-constrained large-scale nonlinear programming (NLP) problems. It is a first-order active-set method (FOAS) that has low memory requirements and thus is suitable for very large-scale problems.
+* [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp) -  solver for large-scale linear programming (LP) problems based on an interior point method (IPM).
 * [handle_solve_socp_ipm (e04pt)](./examples/ex_e04pt.cpp)
 * [handle_solve_ipopt (e04st)](./examples/ex_e04st.cpp)
 * [nlp1_solve (e04uc)](./examples/ex_e04uc.cpp)
