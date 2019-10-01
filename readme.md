@@ -11,8 +11,14 @@ process out across the whole library.
 
 ## Examples supplied with this repo
 
-* [contfn_brent (c05ay)](https://github.com/mikecroucher/nagcpp/blob/master/examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
-* [md_gauss (d01fb)](https://github.com/mikecroucher/nagcpp/blob/master/examples/ex_d01fb.cpp) - md_gauss computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
+* [contfn_brent (c05ay)](./examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
+* [md_gauss (d01fb)](./examples/ex_d01fb.cpp) - computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
+* [dim1_spline (e01ba)](./examples/ex_e01ba.cpp)
+* [dim1_spline_eval (e02bb)](./examples/ex_e02bb.cpp)
+* [handle_solve_dfls_rcomm (e04fg)](./examples/ex_e04fg_boost.cpp)
+* [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp)
+* [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp)
+* [handle_solve_socp_ipm (e04pt)](./examples/ex_e04pt.cpp)
 
 ## Quickstart using NLL6I27DBL for Linux
 
