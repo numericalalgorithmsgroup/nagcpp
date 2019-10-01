@@ -9,6 +9,11 @@ available in this form. These interfaces are automatically generated, and their
 primary purpose is to elicit feedback on their design prior to rolling the
 process out across the whole library.
 
+## Examples supplied with this repo
+
+* [contfn_brent (c05ay)](https://github.com/mikecroucher/nagcpp/blob/master/examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
+* [md_gauss (d01fb)](https://github.com/mikecroucher/nagcpp/blob/master/examples/ex_d01fb.cpp) - md_gauss computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
+
 ## Quickstart using NLL6I27DBL for Linux
 
 [NLL6I27DBL](https://www.nag.co.uk/content/downloads-nag-library-nll6i27dbl) is Mark 27 of the NAG Unified Library for Linux.  
