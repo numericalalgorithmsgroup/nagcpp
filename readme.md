@@ -36,19 +36,20 @@ In the above, `-I../include` is the relative path to the NAG C++ include directo
 ## Basic documentation
 
 Assuming that you have installed the C++ interfaces into the directory called
-[NAGCPP_INSTALL_DIR] then you should have four subdirectories:
+`[NAGCPP_INSTALL_DIR]` then you should have four subdirectories:
 
-[NAGCPP_INSTALL_DIR]/include
+* `[NAGCPP_INSTALL_DIR]/include`
+
   Contains the C++ wrappers and all required utility headers.
+* `[NAGCPP_INSTALL_DIR]/examples`
 
-[NAGCPP_INSTALL_DIR]/examples
   Contains a sample of examples calling the interfaces.
+* `[NAGCPP_INSTALL_DIR]/tests`
 
-[NAGCPP_INSTALL_DIR]/tests
   Contains a series of unit tests that have been used to test the supplied
   wrappers.
+* `[NAGCPP_INSTALL_DIR]/scripts`
 
-[NAGCPP_INSTALL_DIR]/scripts
   Contains a number of Linux scripts for compiling and running the examples
   and unit tests. These scripts can also be run from WSL or cygwin. Prior to
   running any of these scripts you should ensure that your environment is set
@@ -57,8 +58,8 @@ Assuming that you have installed the C++ interfaces into the directory called
   depends on whether you are on Windows or Linux and, if on Linux, which shell
   you are using.
 
-When using the C++ interfaces supplied with this readme you will need to add the
-directory [NAGCPP_INSTALL_DIR]/include to the list of directories your compiler
+When using the C++ interfaces supplied with this Readme you will need to add the
+directory `[NAGCPP_INSTALL_DIR]/include` to the list of directories your compiler
 searches for header files in addition to using any compiler flags usually
 required by the NAG Library (as specified in the Users' Notes supplied with your
 version of the library and also available from the NAG website at
