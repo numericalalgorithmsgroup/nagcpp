@@ -12,7 +12,7 @@ process out across the whole library.
 ## Quickstart using NLL6I27DBL for Linux
 
 [NLL6I27DBL](https://www.nag.co.uk/content/downloads-nag-library-nll6i27dbl) is Mark 27 of the NAG Unified Library for Linux.  
-Assuming that you have this installed at `/opt/NAG/nll6i27dbl/` and are using the Bash shell, here's how to obtain the c++ wrappers and compile one of the examples
+Assuming that you have this installed at `/opt/NAG/nll6i27dbl/` and are using the Bash shell, here's how to obtain the C++ wrappers and compile one of the examples
 
 ```
 # Set up the environment for the NAG Library
