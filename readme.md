@@ -9,24 +9,6 @@ available in this form. These interfaces are automatically generated, and their
 primary purpose is to elicit feedback on their design prior to rolling the
 process out across the whole library.
 
-## Examples supplied with this repo
-
-* [contfn_brent (c05ay)](./examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
-* [md_gauss (d01fb)](./examples/ex_d01fb.cpp) - computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
-* [dim1_spline (e01ba)](./examples/ex_e01ba.cpp) - determines a cubic spline interpolant to a given set of data.
-* [dim1_spline_eval (e02bb)](./examples/ex_e02bb.cpp) - evaluates a cubic spline from its B-spline representation.
-* [handle_solve_dfls_rcomm (e04fg)](./examples/ex_e04fg_boost.cpp) -  a reverse communication Derivative-free Optimization (DFO) solver  for small to medium-scale nonlinear least squares problems with bound constraints.
-* [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp) - solver for bound-constrained large-scale nonlinear programming (NLP) problems. It is a first-order active-set method (FOAS) that has low memory requirements and thus is suitable for very large-scale problems.
-* [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp) -  solver for large-scale linear programming (LP) problems based on an interior point method (IPM).
-* [handle_solve_socp_ipm (e04pt)](./examples/ex_e04pt.cpp)
-* [handle_solve_ipopt (e04st)](./examples/ex_e04st.cpp)
-* [nlp1_solve (e04uc)](./examples/ex_e04uc.cpp)
-* [real_nmf_rcomm (f01sb)](./examples/ex_f01sb.cpp)
-* [quantiles (g01am)](./examples/ex_g01am.cpp)
-* [prob_students_t_noncentral](./examples/ex_g01gb.cpp)
-* [corrmat_nearest_rank (g02ak)](./examples/ex_g02ak.cpp)
-* [lars (g02ma)](./examples/ex_g02ma.cpp)
-
 ## Quickstart using NLL6I27DBL for Linux
 
 [NLL6I27DBL](https://www.nag.co.uk/content/downloads-nag-library-nll6i27dbl) is Mark 27 of the NAG Unified Library for Linux.  
@@ -50,6 +32,26 @@ g++ ex_e04pt.cpp -I../include ${NAGLIB_INCLUDE} ${NAGLIB_LINK} -o ex_e04pt
 
 In the above, `-I../include` is the relative path to the NAG C++ include directory from the examples directory.  You will need to include the full path to this directory if you compile from anywhere else.
 `${NAGLIB_INCLUDE}` and  `${NAGLIB_LINK}` are include and link flags set by the `nagvars.sh` script for the main Library.
+
+
+## Examples supplied with this repo
+
+* [contfn_brent (c05ay)](./examples/ex_c05ay.cpp) - locates a simple zero of a continuous function in a given interval using Brent’s method.
+* [md_gauss (d01fb)](./examples/ex_d01fb.cpp) - computes an estimate of a multidimensional integral (1 to 20), given the analytic form of the integrand and suitable Gaussian weights and abscissae.
+* [dim1_spline (e01ba)](./examples/ex_e01ba.cpp) - determines a cubic spline interpolant to a given set of data.
+* [dim1_spline_eval (e02bb)](./examples/ex_e02bb.cpp) - evaluates a cubic spline from its B-spline representation.
+* [handle_solve_dfls_rcomm (e04fg)](./examples/ex_e04fg_boost.cpp) -  a reverse communication Derivative-free Optimization (DFO) solver  for small to medium-scale nonlinear least squares problems with bound constraints.
+* [handle_solve_bounds_foas (e04kf)](./examples/ex_e04kf.cpp) - solver for bound-constrained large-scale nonlinear programming (NLP) problems. 
+* [handle_solve_lp_ipm (e04mt)](./examples/ex_e04mt.cpp) -  solver for large-scale linear programming (LP) problems
+* [handle_solve_socp_ipm (e04pt)](./examples/ex_e04pt.cpp) - solver for large-scale second-order cone programming (SOCP) problems
+* [handle_solve_ipopt (e04st)](./examples/ex_e04st.cpp) - solver for large scale nonlinear programming (NLP) problems.
+* [nlp1_solve (e04uc)](./examples/ex_e04uc.cpp) - minimize an arbitrary smooth function subject to constraints (which may include simple bounds on the variables, linear constraints and smooth nonlinear constraints) using a sequential quadratic programming (SQP) method. 
+* [real_nmf_rcomm (f01sb)](./examples/ex_f01sb.cpp)- real_nmf_rcomm computes a non-negative matrix factorization for a real non-negative 
+m by n matrix A. It uses reverse communication for evaluating matrix products, so that the matrix A is not accessed explicitly
+* [quantiles (g01am)](./examples/ex_g01am.cpp) - finds specified quantiles from a vector of unsorted data.
+* [prob_students_t_noncentral](./examples/ex_g01gb.cpp) - returns the lower tail probability for the noncentral Student’s t-distribution.
+* [corrmat_nearest_rank (g02ak)](./examples/ex_g02ak.cpp) - computes the nearest correlation matrix of maximum prescribed rank, in the Frobenius norm, to a given square, input matrix.
+* [lars (g02ma)](./examples/ex_g02ma.cpp) - performs Least Angle Regression (LARS), forward stagewise linear regression or Least Absolute Shrinkage and Selection Operator (LASSO).
 
 ## Basic documentation
 
