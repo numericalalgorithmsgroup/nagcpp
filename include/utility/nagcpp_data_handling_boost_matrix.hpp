@@ -10,7 +10,7 @@
 namespace nagcpp {
   namespace data_handling {
 
-    template <typename RT, enum INOUT inout, typename SO>
+    template <typename RT, enum ArgIntent inout, typename SO>
     class RawData<RT, inout, boost::numeric::ublas::matrix<RT, SO>>
       : public BaseRawData<RT, inout> {
         using CRT = typename add_const_if_in<RT, inout>::type;
@@ -124,7 +124,7 @@ namespace nagcpp {
   };
 
   // handle conversion of NAG array to boost::numeric::ublas::matrix ...
-  template <typename RT, enum INOUT inout, typename SO>
+  template <typename RT, enum ArgIntent inout, typename SO>
   class nag_2D_array_to_boost_matrix {
     using NART =
       typename add_const_if_in<utility::array2D<RT, inout>, inout>::type;
@@ -184,7 +184,7 @@ private:
   }
 };
 
-template <typename RT, enum INOUT inout, typename SO>
+template <typename RT, enum ArgIntent inout, typename SO>
 struct convert_nag_array_to_user_t<utility::array2D<RT, inout>, inout,
                                    boost::numeric::ublas::matrix<RT, SO>> {
   static nag_2D_array_to_boost_matrix<RT, inout, SO> get(

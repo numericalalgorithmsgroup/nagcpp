@@ -13,11 +13,11 @@ namespace nagcpp {
     template <enum SORDER sorder>
     struct is_col_major : public std::false_type {};
     template <>
-    struct is_col_major<COL_MAJOR> : public std::true_type {};
+    struct is_col_major<SORDER::COL_MAJOR> : public std::true_type {};
     template <enum SORDER sorder>
     struct is_row_major : public std::false_type {};
     template <>
-    struct is_row_major<ROW_MAJOR> : public std::true_type {};
+    struct is_row_major<SORDER::ROW_MAJOR> : public std::true_type {};
     // ... test value of the SORDER enum
 
     // convert is_col_major boolean into an integer
@@ -34,36 +34,36 @@ namespace nagcpp {
     template <enum TYPE_IS type_is>
     struct is_internal_type : public std::false_type {};
     template <>
-    struct is_internal_type<INTERNAL> : public std::true_type {};
+    struct is_internal_type<TYPE_IS::INTERNAL> : public std::true_type {};
     template <enum TYPE_IS type_is>
     struct is_general_type : public std::false_type {};
     template <>
-    struct is_general_type<GENERAL> : public std::true_type {};
+    struct is_general_type<TYPE_IS::GENERAL> : public std::true_type {};
     template <enum TYPE_IS type_is>
     struct is_const_data_pointer_type : public std::false_type {};
     template <>
-    struct is_const_data_pointer_type<CONST_DATA_POINTER>
+    struct is_const_data_pointer_type<TYPE_IS::CONST_DATA_POINTER>
       : public std::true_type {};
     template <enum TYPE_IS type_is>
     struct is_no_resize_type : public std::false_type {};
     template <>
-    struct is_no_resize_type<NO_RESIZE> : public std::true_type {};
+    struct is_no_resize_type<TYPE_IS::NO_RESIZE> : public std::true_type {};
     // ... test value of the TYPE_IS enum
 
     // test combinations of input / output and TYPE_IS ...
-    template <enum data_handling::INOUT inout, TYPE_IS type_is>
+    template <enum data_handling::ArgIntent inout, TYPE_IS type_is>
     struct index_operator_lhs : public std::true_type {};
     template <>
-    struct index_operator_lhs<data_handling::INOUT::IN, CONST_DATA_POINTER>
+    struct index_operator_lhs<data_handling::ArgIntent::IN, TYPE_IS::CONST_DATA_POINTER>
       : public std::false_type {};
 
-    template <enum data_handling::INOUT inout, TYPE_IS type_is>
+    template <enum data_handling::ArgIntent inout, TYPE_IS type_is>
     struct has_resize : public std::false_type {};
     template <>
-    struct has_resize<data_handling::INOUT::OUT, GENERAL>
+    struct has_resize<data_handling::ArgIntent::OUT, TYPE_IS::GENERAL>
       : public std::true_type {};
     template <>
-    struct has_resize<data_handling::INOUT::INOUT, GENERAL>
+    struct has_resize<data_handling::ArgIntent::INOUT, TYPE_IS::GENERAL>
       : public std::true_type {};
     // ... test combinations of input / output and TYPE_IS
 

@@ -10,25 +10,25 @@
 namespace nagcpp {
   namespace data_handling {
     // enum used only for specializing transformation templates
-    enum INOUT { IN, OUT, INOUT };
+    enum ArgIntent { IN, OUT, INOUT };
 
     // test value of the INOUT enum ...
-    template <enum INOUT inout>
+    template <enum ArgIntent inout>
     struct is_in : public std::false_type {};
     template <>
     struct is_in<IN> : public std::true_type {};
-    template <enum INOUT inout>
+    template <enum ArgIntent inout>
     struct is_out : public std::false_type {};
     template <>
     struct is_out<OUT> : public std::true_type {};
-    template <enum INOUT inout>
+    template <enum ArgIntent inout>
     struct is_inout : public std::false_type {};
     template <>
     struct is_inout<INOUT> : public std::true_type {};
     // ... test value of the INOUT enum
 
     // if inout = data_handling::IN, then add const to RT ...
-    template <typename RT, enum INOUT inout>
+    template <typename RT, enum ArgIntent inout>
     struct add_const_if_in {
       typedef RT type;
     };
@@ -50,7 +50,7 @@ namespace nagcpp {
 
     // base class used when converting user supplied data
     // types into something that can be used in the wrappers
-    template <typename RT, enum INOUT inout>
+    template <typename RT, enum ArgIntent inout>
     class BaseRawData {
       using CRT = typename add_const_if_in<RT, inout>::type;
       public : CRT * data;
@@ -444,11 +444,11 @@ namespace nagcpp {
   // each user types needs a specialization of this template ...
   // (unless it contains the default methods - in which case the
   // default template in nagcpp_data_handling_default will do)
-  template <typename NAT, enum INOUT inout, typename UAT>
+  template <typename NAT, enum ArgIntent inout, typename UAT>
   struct convert_nag_array_to_user_t;
   // ... each user types needs a specialization of this template
 
-  template <typename NAT, enum INOUT inout, typename UAT>
+  template <typename NAT, enum ArgIntent inout, typename UAT>
   auto convert_nag_array_to_user(NAT &nag_array) -> decltype(
     convert_nag_array_to_user_t<
       NAT, inout,
@@ -475,7 +475,7 @@ namespace nagcpp {
     NAT &get(void) { return nag_array; }
   };
 
-  template <typename NAT, enum INOUT inout, typename UAT>
+  template <typename NAT, enum ArgIntent inout, typename UAT>
   struct convert_nag_array_to_user_t {
     static nag_array_to_nag_array<NAT> get(NAT &nag_array){
       return nag_array_to_nag_array<NAT>(nag_array);}

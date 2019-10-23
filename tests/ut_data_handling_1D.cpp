@@ -31,7 +31,7 @@ using namespace nagcpp;
 
 // run_this is a method that runs an individual unit test,
 // all have the same prototype:
-//   template <typename RT, enum data_handling::INOUT inout, typename AC>
+//   template <typename RT, enum data_handling::ArgIntent inout, typename AC>
 //   void run_this(std::string label="")
 //   AC     - type that will be used as an argument to a NAG routine
 //            (for example std::vector<double>)
@@ -72,7 +72,7 @@ using namespace nagcpp;
 //    (if there is no meta information stored, return true)
 // the default test_setup has four template parameters
 //   RT      - type of the underlying data (double or types::f77_integer)
-//   inout   - data_handling::INOUT value indicating whether the class
+//   inout   - data_handling::ArgIntent value indicating whether the class
 //             being tested will be used as an input (IN), output (OUT)
 //             or input / output (INOUT) argument
 //   AC      - type of the class being tested
@@ -81,7 +81,7 @@ using namespace nagcpp;
 
 // NB: this test suite runs:
 //   9 tests on types used in wrappers
-//      of which only 5 are run on data_handling::INOUT::IN classes
+//      of which only 5 are run on data_handling::ArgIntent::IN classes
 //      (or internal ones) and (max of) 7 are run if ut::has_resize
 //      is false
 //   1 test on types used in callbacks
@@ -90,8 +90,8 @@ using namespace nagcpp;
 // "REGISTER_TEST" and then manually uncomment the one you want to run
 
 // clang-format on
-template <typename RT, enum data_handling::INOUT inout, typename AC,
-          ut::TYPE_IS type_is = ut::GENERAL>
+template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+          ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 struct test_setup;
 
 // some utility functions that may be of use in specialisations of test_setup ...
@@ -123,7 +123,7 @@ namespace test_setup_utilities {
 // ... structure to allow tests to be run on a boost types
 
 // structure to allow tests to be run on std::vector ...
-template <typename RT, enum data_handling::INOUT inout, typename VRT>
+template <typename RT, enum data_handling::ArgIntent inout, typename VRT>
 struct test_setup<RT, inout, std::vector<VRT>> {
   using AC = std::vector<VRT>;
   static std::unique_ptr<AC> get_test_data(const size_t n1) {
@@ -168,7 +168,7 @@ struct test_setup<RT, inout, std::vector<VRT>> {
 // ... structure to allow tests to be run on std::vector
 
 // structure to allow tests to be run on (some) arbitrary types ...
-template <typename RT, enum data_handling::INOUT inout, typename AC,
+template <typename RT, enum data_handling::ArgIntent inout, typename AC,
           ut::TYPE_IS type_is>
 struct test_setup {
   using UPAC = std::unique_ptr<AC>;
@@ -248,57 +248,57 @@ struct test_setup {
 // clang-format off
 // #defines for supported types
 #define SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::INOUT::IN, std::vector<double>>("std::vector<double>, double, IN"); \
-  run_this<double, data_handling::INOUT::OUT, std::vector<double>>("std::vector<double>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, std::vector<double>>("std::vector<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::IN, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, OUT");
+  run_this<double, data_handling::ArgIntent::IN, std::vector<double>>("std::vector<double>, double, IN"); \
+  run_this<double, data_handling::ArgIntent::OUT, std::vector<double>>("std::vector<double>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, std::vector<double>>("std::vector<double>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IN, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, OUT");
 
 // NB: MyVector and MyData are supplied as samples of how to write a custom
 // data class that can be used by the NAG interfaces (see example directory)
 // the array1D_wrapper class is a wrapper around array1D
 #define SUPPORTED_TYPES_TO_TEST_WRAPPERS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::INOUT::IN, MyVector<double>>("MyVector<double>. double, IN"); \
-  run_this<double, data_handling::INOUT::OUT, MyVector<double>>("MyVector<double>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, MyVector<double>>("MyVector<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::IN, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, MyVector<types::f77_integer>>("MyVector<f77_integer> f77_integer, INOUT"); \
-  run_this<double, data_handling::INOUT::IN, MyData<double>>("MyData<double>, double, IN"); \
-  run_this<double, data_handling::INOUT::OUT, MyData<double>>("MyData<double>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, MyData<double>>("MyData<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, INOUT"); \
-  run_this<double, data_handling::INOUT::IN, ut::array1D_wrapper<double, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IN>, double, IN"); \
-  run_this<double, data_handling::INOUT::OUT, ut::array1D_wrapper<double, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, ut::array1D_wrapper<double, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::IN, ut::array1D_wrapper<types::f77_integer, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IN>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, ut::array1D_wrapper<types::f77_integer, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, ut::array1D_wrapper<types::f77_integer, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, INOUT>, f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IN, MyVector<double>>("MyVector<double>. double, IN"); \
+  run_this<double, data_handling::ArgIntent::OUT, MyVector<double>>("MyVector<double>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, MyVector<double>>("MyVector<double>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IN, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, IN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, OUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, MyVector<types::f77_integer>>("MyVector<f77_integer> f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IN, MyData<double>>("MyData<double>, double, IN"); \
+  run_this<double, data_handling::ArgIntent::OUT, MyData<double>>("MyData<double>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, MyData<double>>("MyData<double>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, OUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IN, ut::array1D_wrapper<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IN>, double, IN"); \
+  run_this<double, data_handling::ArgIntent::OUT, ut::array1D_wrapper<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, OUT>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, ut::array1D_wrapper<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, INOUT>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IN, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IN>, f77_integer, IN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, OUT>, f77_integer, OUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, INOUT>, f77_integer, INOUT"); \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS
 
 #define SUPPORTED_TYPES_TO_TEST_CALLBACKS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::INOUT::IN, utility::array1D<double, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array1D<double, IN>, double, IN"); \
-  run_this<double, data_handling::INOUT::OUT, utility::array1D<double, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array1D<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, utility::array1D<double, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array1D<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::IN, utility::array1D<types::f77_integer, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array1D<f77_integer, IN>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, utility::array1D<types::f77_integer, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array1D<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, utility::array1D<types::f77_integer, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array1D<f77_integer, INOUT>, f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IN, utility::array1D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, IN>, double, IN"); \
+  run_this<double, data_handling::ArgIntent::OUT, utility::array1D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, OUT>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, utility::array1D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, INOUT>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IN, utility::array1D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, IN>, f77_integer, IN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, OUT>, f77_integer, OUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, INOUT>, f77_integer, INOUT"); \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS
 
 // #defines for internal types (these are not expected to be used as
 // input to NAG routines, but are leveraging some of the same tests)
 // (RawData<RT,inout> can potentially be used for local arrays, but
-// never with data_handling::IN)
+// never with data_handling::ArgIntent::IN)
 #define INTERNAL_TYPES_TO_TEST_WRAPPERS \
-  run_this<double, data_handling::INOUT::OUT, data_handling::RawData<double, data_handling::INOUT::OUT>, ut::INTERNAL> ("RawData<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::INOUT::INOUT, data_handling::RawData<double, data_handling::INOUT::INOUT>, ut::INTERNAL> ("RawData<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::OUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::OUT>, ut::INTERNAL> ("RawData<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::INOUT::INOUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::INOUT>, ut::INTERNAL> ("RawData<f77_integer, INOUT>, f77_integer, INOUT");
+  run_this<double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, OUT>, double, OUT"); \
+  run_this<double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, INOUT>, double, INOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, OUT>, f77_integer, OUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, INOUT>, f77_integer, INOUT");
 
 // #define used to set up tests for types valid in main wrappers
 #define DEFINE_RUN_METHOD_WRAPPERS \
@@ -332,8 +332,8 @@ struct test_setup {
 struct test_get_size_function : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1 = 10;
@@ -347,7 +347,7 @@ struct test_get_size_function : public TestCase {
     call_test<RT, inout, AC, type_is>(ac1, ac2, n1);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac1, std::unique_ptr<AC> &ac2, size_t n1)
     ->
@@ -357,7 +357,7 @@ struct test_get_size_function : public TestCase {
     RD local_ac2(*ac2);
     do_test<RD>(local_ac1, local_ac2, n1);
   }
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac1, std::unique_ptr<AC> &ac2, size_t n1)
     ->
@@ -409,8 +409,8 @@ REGISTER_TEST(test_get_size_function, "Test the function that returns the size o
 struct test_check_function : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1 = 10;
@@ -419,7 +419,7 @@ struct test_check_function : public TestCase {
     call_test<RT, inout, AC, type_is>(ac, n1);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
@@ -427,7 +427,7 @@ struct test_check_function : public TestCase {
     RD local_ac(*ac);
     do_test<RD>(local_ac, n1);
   }
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
@@ -491,8 +491,8 @@ REGISTER_TEST(test_check_function, "Test the function that checks whether the co
 struct test_data_variable : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1 = 11;
@@ -501,7 +501,7 @@ struct test_data_variable : public TestCase {
     call_test<RT, inout, AC, type_is>(ac, n1);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
@@ -510,7 +510,7 @@ struct test_data_variable : public TestCase {
     do_test<RD, RT>(local_ac, n1);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
@@ -534,15 +534,15 @@ REGISTER_TEST(test_data_variable, "Test the data class variable");
 struct test_get_data_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
     // don't run the get_data method on internal arrays
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -584,8 +584,8 @@ REGISTER_TEST(test_get_data_method, "Test the get_data method returns contiguous
 struct test_array_referencing_overload : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1 = 9;
@@ -594,7 +594,7 @@ struct test_array_referencing_overload : public TestCase {
     call_test<RT, inout, AC, type_is>(ac, n1);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
@@ -602,7 +602,7 @@ struct test_array_referencing_overload : public TestCase {
     RD local_ac(*ac);
     do_test<RD, RT>(local_ac, n1);
   }
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1) ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
@@ -627,15 +627,15 @@ REGISTER_TEST(test_array_referencing_overload, "Test that the array referencing 
 struct test_allocate_local_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value, void>::type {
     // allocate_local should never be called on an input array
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!data_handling::is_in<inout>::value, void>::type {
     SUB_TITLE(label);
@@ -644,7 +644,7 @@ struct test_allocate_local_method : public TestCase {
     call_test<RT, inout, AC, type_is>(ac);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac) ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
@@ -652,7 +652,7 @@ struct test_allocate_local_method : public TestCase {
     RD local_ac(*ac);
     do_test<RT, RD>(local_ac);
   }
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac) ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
@@ -683,8 +683,8 @@ REGISTER_TEST(test_allocate_local_method, "Test we can allocate a local array wi
 struct test_resize_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::has_resize<inout, type_is>::value,
                             void>::type {
@@ -692,8 +692,8 @@ struct test_resize_method : public TestCase {
     // or an array defined via type_is to not have a resize
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::has_resize<inout, type_is>::value, void>::type {
 
@@ -753,8 +753,8 @@ REGISTER_TEST(test_resize_method, "Test the method that resizes arrays");
 struct test_copy_back_method_array_preallocated : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value ||
                               ut::is_internal_type<type_is>::value,
@@ -762,8 +762,8 @@ struct test_copy_back_method_array_preallocated : public TestCase {
     // copyback should never be called on an input array or an internal array
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!(data_handling::is_in<inout>::value ||
                               ut::is_internal_type<type_is>::value),
@@ -847,16 +847,16 @@ REGISTER_TEST(test_copy_back_method_array_preallocated, "Test method to copy dat
 struct test_copy_back_method_array_not_preallocated : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::has_resize<inout, type_is>::value,
                             void>::type {
     // copyback should never be called on an input array or an internal array
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::has_resize<inout, type_is>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -943,16 +943,16 @@ REGISTER_TEST(test_copy_back_method_array_not_preallocated, "Test method to copy
 // clang-format on
 // ... tests related to using the type as an argument to a NAG routine
 
-template <typename RT, enum data_handling::INOUT inout, typename AC,
-          enum ut::TYPE_IS type_is = ut::GENERAL>
+template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+          enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_in(const RT *x, const size_t n1, bool &meta_info_ok,
                       RT &max_diff) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::INOUT::IN> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::IN> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    const utility::array1D<RT, data_handling::INOUT::IN>, inout, AC>(local_x);
+    const utility::array1D<RT, data_handling::ArgIntent::IN>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input argument ...
   // check that the users type has the correct meta information
@@ -966,15 +966,15 @@ void pseudo_helper_in(const RT *x, const size_t n1, bool &meta_info_ok,
   // ... simulate calling a callback with X as an input argument
 }
 
-template <typename RT, enum data_handling::INOUT inout, typename AC,
-          enum ut::TYPE_IS type_is = ut::GENERAL>
+template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+          enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_out(RT *x, const size_t n1, bool &meta_info_ok) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::INOUT::OUT> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::OUT> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array1D<RT, data_handling::INOUT::OUT>, inout, AC>(local_x);
+    utility::array1D<RT, data_handling::ArgIntent::OUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an output argument ...
   // check that the users type has the correct meta information
@@ -986,16 +986,16 @@ void pseudo_helper_out(RT *x, const size_t n1, bool &meta_info_ok) {
   // ... simulate calling a callback with X as an output argument
 }
 
-template <typename RT, enum data_handling::INOUT inout, typename AC,
-          enum ut::TYPE_IS type_is = ut::GENERAL>
+template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+          enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_inout(RT *x, const size_t n1, bool &meta_info_ok,
                          RT &max_diff) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::INOUT::INOUT> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::INOUT> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array1D<RT, data_handling::INOUT::INOUT>, inout, AC>(local_x);
+    utility::array1D<RT, data_handling::ArgIntent::INOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input / output argument ...
   // check that the users type has the correct meta information
@@ -1020,8 +1020,8 @@ void pseudo_helper_inout(RT *x, const size_t n1, bool &meta_info_ok,
 struct test_convert_nag_array_to_user : public TestCase {
   DEFINE_RUN_METHOD_CALLBACKS
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value, void>::type {
     SUB_TITLE(label);
@@ -1038,8 +1038,8 @@ struct test_convert_nag_array_to_user : public TestCase {
     }
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_out<inout>::value, void>::type {
     SUB_TITLE(label);
@@ -1058,8 +1058,8 @@ struct test_convert_nag_array_to_user : public TestCase {
     }
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_inout<inout>::value, void>::type {
     SUB_TITLE(label);

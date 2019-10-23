@@ -13,11 +13,12 @@
 #include "e04/nagcpp_e04fg.hpp"
 #include "e04/nagcpp_e04rh.hpp"
 #include "e04/nagcpp_e04rm.hpp"
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
 #include <iostream>
 #include <math.h>
 
+#if defined(HAVE_BOOST_MATRIX) && defined(HAVE_BOOST_VECTOR)
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/vector.hpp>
 int main(void) {
   std::cout << "nagcpp::opt::handle_solve_dfls_rcomm Example" << std::endl;
 
@@ -82,3 +83,12 @@ int main(void) {
 
   return 0;
 }
+
+#else
+int main(void) {
+  std::cout << "nagcpp::opt::handle_solve_dfls_rcomm Example" << std::endl;
+  std::cout << "This example requires boost." <<
+    " If boost is available check the variables in nagcpp_available_data_containers.hpp" <<
+    std::endl;
+}
+#endif

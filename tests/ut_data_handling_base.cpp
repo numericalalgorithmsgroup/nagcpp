@@ -8,17 +8,17 @@ using namespace nagcpp;
 
 struct test_INOUT_functions : public TestCase {
   void run() override {
-    ASSERT_TRUE(data_handling::is_in<data_handling::INOUT::IN>::value);
-    ASSERT_FALSE(data_handling::is_in<data_handling::INOUT::OUT>::value);
-    ASSERT_FALSE(data_handling::is_in<data_handling::INOUT::INOUT>::value);
+    ASSERT_TRUE(data_handling::is_in<data_handling::ArgIntent::IN>::value);
+    ASSERT_FALSE(data_handling::is_in<data_handling::ArgIntent::OUT>::value);
+    ASSERT_FALSE(data_handling::is_in<data_handling::ArgIntent::INOUT>::value);
 
-    ASSERT_FALSE(data_handling::is_out<data_handling::INOUT::IN>::value);
-    ASSERT_TRUE(data_handling::is_out<data_handling::INOUT::OUT>::value);
-    ASSERT_FALSE(data_handling::is_out<data_handling::INOUT::INOUT>::value);
+    ASSERT_FALSE(data_handling::is_out<data_handling::ArgIntent::IN>::value);
+    ASSERT_TRUE(data_handling::is_out<data_handling::ArgIntent::OUT>::value);
+    ASSERT_FALSE(data_handling::is_out<data_handling::ArgIntent::INOUT>::value);
 
-    ASSERT_FALSE(data_handling::is_inout<data_handling::INOUT::IN>::value);
-    ASSERT_FALSE(data_handling::is_inout<data_handling::INOUT::OUT>::value);
-    ASSERT_TRUE(data_handling::is_inout<data_handling::INOUT::INOUT>::value);
+    ASSERT_FALSE(data_handling::is_inout<data_handling::ArgIntent::IN>::value);
+    ASSERT_FALSE(data_handling::is_inout<data_handling::ArgIntent::OUT>::value);
+    ASSERT_TRUE(data_handling::is_inout<data_handling::ArgIntent::INOUT>::value);
   }
 };
 // clang-format off

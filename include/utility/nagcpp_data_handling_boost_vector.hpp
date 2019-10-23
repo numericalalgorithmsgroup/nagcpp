@@ -10,7 +10,7 @@
 namespace nagcpp {
   namespace data_handling {
 
-    template <typename RT, enum INOUT inout>
+    template <typename RT, enum ArgIntent inout>
     class RawData<RT, inout, boost::numeric::ublas::vector<RT>>
       : public BaseRawData<RT, inout> {
         using CRT = typename add_const_if_in<RT, inout>::type;
@@ -75,7 +75,7 @@ namespace nagcpp {
   };
 
   // handle conversion of NAG array to boost::numeric::ublas::vector ...
-  template <typename RT, enum INOUT inout>
+  template <typename RT, enum ArgIntent inout>
   class nag_1D_array_to_boost_vector {
     using NART =
       typename add_const_if_in<utility::array1D<RT, inout>, inout>::type;
@@ -127,7 +127,7 @@ private:
   }
 };
 
-template <typename RT, enum INOUT inout>
+template <typename RT, enum ArgIntent inout>
 struct convert_nag_array_to_user_t<utility::array1D<RT, inout>, inout,
                                    boost::numeric::ublas::vector<RT>> {
   static nag_1D_array_to_boost_vector<RT, inout> get(

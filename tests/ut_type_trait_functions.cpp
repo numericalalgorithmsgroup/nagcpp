@@ -47,33 +47,33 @@ REGISTER_TEST(test_TYPE_IS_functions, "Test trait functions for TYPE_IS");
 
 struct test_index_operator_lhs_function : public TestCase {
   void run() override {
-    ASSERT_FALSE((ut::index_operator_lhs<data_handling::INOUT::IN,
-                                         ut::CONST_DATA_POINTER>::value));
-    ASSERT_TRUE((ut::index_operator_lhs<data_handling::INOUT::OUT,
-                                        ut::CONST_DATA_POINTER>::value));
-    ASSERT_TRUE((ut::index_operator_lhs<data_handling::INOUT::INOUT,
-                                        ut::CONST_DATA_POINTER>::value));
+    ASSERT_FALSE((ut::index_operator_lhs<data_handling::ArgIntent::IN,
+                                         ut::TYPE_IS::CONST_DATA_POINTER>::value));
+    ASSERT_TRUE((ut::index_operator_lhs<data_handling::ArgIntent::OUT,
+                                        ut::TYPE_IS::CONST_DATA_POINTER>::value));
+    ASSERT_TRUE((ut::index_operator_lhs<data_handling::ArgIntent::INOUT,
+                                        ut::TYPE_IS::CONST_DATA_POINTER>::value));
 
     ASSERT_TRUE(
-      (ut::index_operator_lhs<data_handling::INOUT::IN, ut::GENERAL>::value));
+      (ut::index_operator_lhs<data_handling::ArgIntent::IN, ut::TYPE_IS::GENERAL>::value));
     ASSERT_TRUE(
-      (ut::index_operator_lhs<data_handling::INOUT::OUT, ut::GENERAL>::value));
+      (ut::index_operator_lhs<data_handling::ArgIntent::OUT, ut::TYPE_IS::GENERAL>::value));
     ASSERT_TRUE((
-      ut::index_operator_lhs<data_handling::INOUT::INOUT, ut::GENERAL>::value));
+      ut::index_operator_lhs<data_handling::ArgIntent::INOUT, ut::TYPE_IS::GENERAL>::value));
 
     ASSERT_TRUE(
-      (ut::index_operator_lhs<data_handling::INOUT::IN, ut::NO_RESIZE>::value));
+      (ut::index_operator_lhs<data_handling::ArgIntent::IN, ut::TYPE_IS::NO_RESIZE>::value));
     ASSERT_TRUE((
-      ut::index_operator_lhs<data_handling::INOUT::OUT, ut::NO_RESIZE>::value));
-    ASSERT_TRUE((ut::index_operator_lhs<data_handling::INOUT::INOUT,
-                                        ut::NO_RESIZE>::value));
+      ut::index_operator_lhs<data_handling::ArgIntent::OUT, ut::TYPE_IS::NO_RESIZE>::value));
+    ASSERT_TRUE((ut::index_operator_lhs<data_handling::ArgIntent::INOUT,
+                                        ut::TYPE_IS::NO_RESIZE>::value));
 
     ASSERT_TRUE(
-      (ut::index_operator_lhs<data_handling::INOUT::IN, ut::INTERNAL>::value));
+      (ut::index_operator_lhs<data_handling::ArgIntent::IN, ut::TYPE_IS::INTERNAL>::value));
     ASSERT_TRUE(
-      (ut::index_operator_lhs<data_handling::INOUT::OUT, ut::INTERNAL>::value));
-    ASSERT_TRUE((ut::index_operator_lhs<data_handling::INOUT::INOUT,
-                                        ut::INTERNAL>::value));
+      (ut::index_operator_lhs<data_handling::ArgIntent::OUT, ut::TYPE_IS::INTERNAL>::value));
+    ASSERT_TRUE((ut::index_operator_lhs<data_handling::ArgIntent::INOUT,
+                                        ut::TYPE_IS::INTERNAL>::value));
   }
 };
 // clang-format off
@@ -83,32 +83,32 @@ REGISTER_TEST(test_index_operator_lhs_function, "Test trait function: index_oper
 struct test_has_resize_function : public TestCase {
   void run() override {
     ASSERT_FALSE((
-      ut::has_resize<data_handling::INOUT::IN, ut::CONST_DATA_POINTER>::value));
-    ASSERT_FALSE((ut::has_resize<data_handling::INOUT::OUT,
-                                 ut::CONST_DATA_POINTER>::value));
-    ASSERT_FALSE((ut::has_resize<data_handling::INOUT::INOUT,
-                                 ut::CONST_DATA_POINTER>::value));
+      ut::has_resize<data_handling::ArgIntent::IN, ut::TYPE_IS::CONST_DATA_POINTER>::value));
+    ASSERT_FALSE((ut::has_resize<data_handling::ArgIntent::OUT,
+                                 ut::TYPE_IS::CONST_DATA_POINTER>::value));
+    ASSERT_FALSE((ut::has_resize<data_handling::ArgIntent::INOUT,
+                                 ut::TYPE_IS::CONST_DATA_POINTER>::value));
 
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::IN, ut::GENERAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::IN, ut::TYPE_IS::GENERAL>::value));
     ASSERT_TRUE(
-      (ut::has_resize<data_handling::INOUT::OUT, ut::GENERAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::OUT, ut::TYPE_IS::GENERAL>::value));
     ASSERT_TRUE(
-      (ut::has_resize<data_handling::INOUT::INOUT, ut::GENERAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::INOUT, ut::TYPE_IS::GENERAL>::value));
 
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::IN, ut::NO_RESIZE>::value));
+      (ut::has_resize<data_handling::ArgIntent::IN, ut::TYPE_IS::NO_RESIZE>::value));
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::OUT, ut::NO_RESIZE>::value));
+      (ut::has_resize<data_handling::ArgIntent::OUT, ut::TYPE_IS::NO_RESIZE>::value));
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::INOUT, ut::NO_RESIZE>::value));
+      (ut::has_resize<data_handling::ArgIntent::INOUT, ut::TYPE_IS::NO_RESIZE>::value));
 
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::IN, ut::INTERNAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::IN, ut::TYPE_IS::INTERNAL>::value));
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::OUT, ut::INTERNAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::OUT, ut::TYPE_IS::INTERNAL>::value));
     ASSERT_FALSE(
-      (ut::has_resize<data_handling::INOUT::INOUT, ut::INTERNAL>::value));
+      (ut::has_resize<data_handling::ArgIntent::INOUT, ut::TYPE_IS::INTERNAL>::value));
   }
 };
 // clang-format off

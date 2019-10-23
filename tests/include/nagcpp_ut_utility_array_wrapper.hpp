@@ -13,7 +13,7 @@ namespace nagcpp {
     // actual data during testing (when testing callback functionality
     // the actually class, i.e. data_handling::array1D, is used instead)
 
-    template <typename RT, enum data_handling::INOUT inout>
+    template <typename RT, enum data_handling::ArgIntent inout>
     class array1D_wrapper {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;
       using UA = typename utility::array1D<RT, inout>;
@@ -64,7 +64,7 @@ namespace nagcpp {
       array1D_wrapper(const array1D_wrapper &) = delete;
     };
 
-    template <typename RT, enum data_handling::INOUT inout,
+    template <typename RT, enum data_handling::ArgIntent inout,
               enum ut::SORDER sorder>
     class array2D_wrapper {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;
@@ -122,7 +122,7 @@ namespace nagcpp {
       array2D_wrapper(const array2D_wrapper &) = delete;
     };
 
-    template <typename RT, enum data_handling::INOUT inout,
+    template <typename RT, enum data_handling::ArgIntent inout,
               enum ut::SORDER sorder>
     class array3D_wrapper {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;

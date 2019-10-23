@@ -10,7 +10,7 @@ namespace nagcpp {
     // we don't need a RawData specialization as the default works for std::vector
 
     // handle conversion of NAG array to std::vector ...
-    template <typename RT, enum INOUT inout,
+    template <typename RT, enum ArgIntent inout,
               typename ALLOCATOR = std::allocator<RT>>
     class nag_1D_array_to_std_vector {
       using NART =
@@ -66,7 +66,7 @@ namespace nagcpp {
       }
     };
 
-    template <typename RT, enum INOUT inout, typename ALLOCATOR>
+    template <typename RT, enum ArgIntent inout, typename ALLOCATOR>
     struct convert_nag_array_to_user_t<utility::array1D<RT, inout>, inout,
                                        std::vector<RT, ALLOCATOR>> {
       static nag_1D_array_to_std_vector<RT, inout, ALLOCATOR> get(

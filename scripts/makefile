@@ -47,19 +47,39 @@ endif
 NAMEOBJ := -o # comment to preserve trailing space
 NAMEEXE := -o # comment to preserve trailing space
 
+USE_VS ?= 0
 ifeq ($(PLATOS),"WINDOWS")
   ifeq ($(IS_CYGWIN),1)
     NAGLIB_CXX := $(SCRIPTS_DIR)/win_icl
   else
-    NAGLIB_CXX := icl.exe
+    HAVE_ICL := $(shell which icl.exe | wc -l)
+    ifeq ($(HAVE_ICL),0)
+      USE_VS = 1
+    endif
+    ifeq ($(USE_VS),1)
+      NAGLIB_CXX := cl.exe
+      LINK_EXE = link.exe
+      LINK_FLAGS += /nodefaultlib:ifconsol.lib /nodefaultlib:ifmodintr.lib /nodefaultlib:libifcoremd.lib /nodefaultlib:libifportmd.lib /nodefaultlib:ifwin.lib
+    else
+      NAGLIB_CXX := icl.exe
+    endif
   endif
-  NAGLIB_CXXFLAGS := /EHsc /MD /Qstd=c++11
+
   NAGLIB_LINK := nag_nag_MD.lib user32.lib
+  NAGLIB_CXXFLAGS := /EHsc /MD
   NAMEOBJ := -Fo:
-  NAMEEXE := -Fe:
+
+  ifeq ($(USE_VS),1)
+    NAMEEXE := /OUT:
+  else
+    NAMEEXE := -Fe:
+    NAGLIB_LINK += /Qstd=c++11
+  endif
 else
   ADDITIONAL_CXXFLAGS += -std=c++11
 endif
+
+LINK_EXE ?= $(NAGLIB_CXX)
 
 ifeq ($(debug_mode),1)
   ifeq ($(PLATOS),"WINDOWS")
@@ -120,7 +140,7 @@ $(ALL_OBJ) : $(OBJ_DIR)/%$(OBJ_EXT) : %$(CPP_EXT) check_env
 
 $(ALL_EXE) : $(EXE_DIR)/%$(EXE_EXT) : $(OBJ_DIR)/%$(OBJ_EXT) check_env
 	@mkdir -p $(EXE_DIR)
-	$(ECHO) ${NAGLIB_CXX} ${NAGLIB_CXXFLAGS} $(ADDITIONAL_CXXFLAGS) ${NAGLIB_INCLUDE} $< ${NAGLIB_LINK} $(NAMEEXE)$(EXE_DIR)/$(@F)
+	$(ECHO) $(LINK_EXE) $(LINK_FLAGS) ${NAGLIB_INCLUDE} $< ${NAGLIB_LINK} $(NAMEEXE)$(EXE_DIR)/$(@F)
 
 BOOST_EXE=$(filter %boost.exe, $(ALL_EXE))
 ALL_NO_THIRD_PARTY_EXE=$(filter-out $(BOOST_EXE), $(ALL_EXE))
@@ -138,8 +158,10 @@ endif
 dump:
 	@echo "PLATOS              : $(PLATOS)"
 	@echo "NAGLIB_CXX          : $(NAGLIB_CXX)"
+	@echo "LINK_EXE            : $(LINK_EXE)"
 	@echo "NAGLIB_CXXFLAGS     : $(NAGLIB_CXXFLAGS)"
 	@echo "NAGLIB_LINK         : $(NAGLIB_LINK)"
+	@echo "LINK_FLAGS          : $(LINK_FLAGS)"
 	@echo "ADDITIONAL_CXXFLAGS : $(ADDITIONAL_CXXFLAGS)"
 	@echo "INSTALLATION_DIR    : $(INSTALLATION_DIR)"
 	@echo "EXAMPLE_SRC         : $(EXAMPLE_SRC)"

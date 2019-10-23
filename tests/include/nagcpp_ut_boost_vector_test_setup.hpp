@@ -5,18 +5,18 @@
 // boost types to run through tests in ut_data_handling_1D.cpp ...
 // clang-format off
 #define BOOST_1D_TYPES_TO_TEST_WRAPPERS \
-run_this<double, data_handling::INOUT::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
-run_this<double, data_handling::INOUT::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
-run_this<double, data_handling::INOUT::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
-run_this<double, data_handling::INOUT::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
-run_this<double, data_handling::INOUT::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
-run_this<double, data_handling::INOUT::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
-run_this<types::f77_integer, data_handling::INOUT::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
-run_this<types::f77_integer, data_handling::INOUT::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
-run_this<types::f77_integer, data_handling::INOUT::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT"); \
-run_this<types::f77_integer, data_handling::INOUT::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
-run_this<types::f77_integer, data_handling::INOUT::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
-run_this<types::f77_integer, data_handling::INOUT::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT");
+run_this<double, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
+run_this<double, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
+run_this<double, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
+run_this<double, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
+run_this<double, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
+run_this<double, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
+run_this<types::f77_integer, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
+run_this<types::f77_integer, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT");
 
 #define BOOST_1D_TYPES_TO_TEST_CALLBACKS \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS
@@ -24,7 +24,7 @@ run_this<types::f77_integer, data_handling::INOUT::INOUT, boost::numeric::ublas:
 // ... boost types to run through tests in ut_data_handling_1D.cpp
 
 // structure to allow tests to be run on a boost vector ...
-template <typename RT, enum data_handling::INOUT inout, typename MRT,
+template <typename RT, enum data_handling::ArgIntent inout, typename MRT,
           ut::TYPE_IS type_is>
 struct test_setup<RT, inout, boost::numeric::ublas::vector<MRT>, type_is> {
   using AC = boost::numeric::ublas::vector<MRT>;

@@ -16,9 +16,9 @@
 
 void objfun(
   const nagcpp::types::f77_integer mode,
-  const nagcpp::utility::array1D<double, nagcpp::data_handling::IN> &x,
+  const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IN> &x,
   double &objf,
-  nagcpp::utility::array1D<double, nagcpp::data_handling::INOUT> &objgrd,
+  nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::INOUT> &objgrd,
   const nagcpp::types::f77_integer nstate) {
   if (mode == 0 || mode == 2) {
     objf = x(0) * x(3) * (x(0) + x(1) + x(2)) + x(2);
@@ -34,10 +34,10 @@ void objfun(
 void confun(
   const nagcpp::types::f77_integer mode,
   const nagcpp::utility::array1D<nagcpp::types::f77_integer,
-                                 nagcpp::data_handling::IN> &needc,
-  const nagcpp::utility::array1D<double, nagcpp::data_handling::IN> &x,
-  nagcpp::utility::array1D<double, nagcpp::data_handling::OUT> &c,
-  nagcpp::utility::array2D<double, nagcpp::data_handling::INOUT> &cjac,
+                                 nagcpp::data_handling::ArgIntent::IN> &needc,
+  const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IN> &x,
+  nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::OUT> &c,
+  nagcpp::utility::array2D<double, nagcpp::data_handling::ArgIntent::INOUT> &cjac,
   const nagcpp::types::f77_integer nstate) {
   if (needc(0) > 0) {
     if (mode == 0 || mode == 2) {

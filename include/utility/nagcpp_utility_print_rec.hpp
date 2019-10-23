@@ -11,11 +11,11 @@ namespace nagcpp {
   namespace utility {
 
 #ifndef NAG_PRINT_RECH
-#define NAG_PRINT_RECH                                               \
-  void(NAG_CALL * print_rech)(void *print_rec, types::engine_data &, \
-                              CONST types::f77_integer &,            \
-                              CONST char *NAG_STDCALL_LEN(),         \
-                              types::f77_integer &NAG_NSTDCALL_LEN())
+#define NAG_PRINT_RECH                                                      \
+  void(NAG_CALL * print_rech)(void *print_rec, types::engine_data &en_data, \
+                              CONST types::f77_integer &nout,               \
+                              CONST char *rec NAG_STDCALL_LEN(length_rec),  \
+                              types::f77_integer &ierr NAG_NSTDCALL_LEN(length_rec))
 #endif
 
     void NAG_CALL

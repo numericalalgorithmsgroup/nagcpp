@@ -184,7 +184,7 @@ namespace nagcpp {
     //        or const double / const types::f77_integer etc
     // inout: whether the data is IN, OUT or INOUT (used to specialize the class)
     // AC   : users array container type (used to specialize the class)
-    template <typename RT, enum INOUT inout, typename AC = std::nullptr_t>
+    template <typename RT, enum ArgIntent inout, typename AC = std::nullptr_t>
     class RawData : public BaseRawData<RT, inout> {
       using CRT = typename add_const_if_in<RT, inout>::type;
 
@@ -349,7 +349,7 @@ namespace nagcpp {
     // class for preparing character / string data for passing
     // to the engine
     // NB: the array of chars pointed to by data is NOT null terminated
-    template <enum INOUT inout, typename AC = std::nullptr_t>
+    template <enum ArgIntent inout, typename AC = std::nullptr_t>
     class StringRawData : public BaseRawData<char, inout> {
 
     public:

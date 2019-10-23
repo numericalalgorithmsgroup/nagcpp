@@ -1,4 +1,4 @@
-This is version 27.0.0.0 of a set of C++11 interfaces for the NAG Library,
+This is version 27.0.0.1 of a set of C++11 interfaces for the NAG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of Mark 27.0 of the

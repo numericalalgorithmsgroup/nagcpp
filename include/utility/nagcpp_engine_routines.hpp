@@ -18,7 +18,7 @@
 
 #ifndef NAG_NSTDCALL_LEN
 #if defined(_WIN32) && defined(USE_STDCALL)
-#define
+#define NAG_NSTDCALL_LEN(ARG)
 #else
 #define NAG_NSTDCALL_LEN(ARG) NAG_STRING_LEN(ARG)
 #endif

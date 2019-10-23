@@ -32,7 +32,7 @@ using namespace nagcpp;
 
 // run_this is a method that runs an individual unit test,
 // all have the same prototype:
-//   template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout, typename AC>
+//   template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout, typename AC>
 //   void run_this(std::string label="")
 //   AC     - type that will be used as an argument to a NAG routine
 //            (for example std::vector<double>)
@@ -87,7 +87,7 @@ using namespace nagcpp;
 //    (if there is no meta information stored, return true)
 // the default test_setup has four template parameters
 //   RT      - type of the underlying data (double or types::f77_integer)
-//   inout   - data_handling::INOUT value indicating whether the class
+//   inout   - data_handling::ArgIntent value indicating whether the class
 //             being tested will be used as an input (IN), output (OUT)
 //             or input / output (INOUT) argument
 //   AC      - type of the class being tested
@@ -96,7 +96,7 @@ using namespace nagcpp;
 
 // NB: this test suite runs:
 //   11 tests on types used in wrappers
-//      of which only 7 are run on data_handling::INOUT::IN classes
+//      of which only 7 are run on data_handling::ArgIntent::IN classes
 //      (or internal ones) and (max of) 9 are run if ut::has_resize
 //      is false
 //   1  test on types used in callbacks
@@ -105,12 +105,12 @@ using namespace nagcpp;
 // "REGISTER_TEST" and then manually uncomment the one you want to run
 
 // clang-format on
-template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout,
-          typename AC, ut::TYPE_IS type_is = ut::GENERAL>
+template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout,
+          typename AC, ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 struct test_setup;
 
 // structure to allow tests to be run on (some) arbitrary types ...
-template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout,
+template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout,
           typename AC, ut::TYPE_IS type_is>
 struct test_setup {
   using UPAC = std::unique_ptr<AC>;
@@ -270,63 +270,63 @@ private:
 // the array3D_wrapper class is a wrapper around array3D
 #define SUPPORTED_TYPES_TO_TEST_WRAPPERS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::IN, MyTable<double>>("MyTable<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::OUT, MyTable<double>>("MyTable<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::INOUT, MyTable<double>>("MyTable<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::IN, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::OUT, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, MyTable<double>>("MyTable<double>, double, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, MyTable<double>>("MyTable<double>, double, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, MyTable<double>>("MyTable<double>, double, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, MyTable<types::f77_integer>>("MyTable<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
 \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::IN, MyData<double>>("MyData<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::OUT, MyData<double>>("MyData<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::INOUT, MyData<double>>("MyData<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, MyData<double>>("MyData<double>, double, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, MyData<double>>("MyData<double>, double, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, MyData<double>>("MyData<double>, double, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
 \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::IN, ut::array3D_wrapper<double, data_handling::INOUT::IN, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, IN>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::OUT, ut::array3D_wrapper<double, data_handling::INOUT::OUT, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, OUT>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::INOUT, ut::array3D_wrapper<double, data_handling::INOUT::INOUT, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, INOUT>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::IN, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::IN, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, IN>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::OUT, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::OUT, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::INOUT, ut::SORDER::COL_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, ut::array3D_wrapper<double, data_handling::ArgIntent::IN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, IN>, double, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, ut::array3D_wrapper<double, data_handling::ArgIntent::OUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, OUT>, double, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, ut::array3D_wrapper<double, data_handling::ArgIntent::INOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, INOUT>, double, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::IN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, IN>, f77_integer, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
 \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::IN, ut::array3D_wrapper<double, data_handling::INOUT::IN, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, IN>, double, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::OUT, ut::array3D_wrapper<double, data_handling::INOUT::OUT, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, OUT>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::INOUT, ut::array3D_wrapper<double, data_handling::INOUT::INOUT, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<double, INOUT>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::IN, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::IN, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, IN>, f77_integer, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::OUT, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::OUT, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, ut::array3D_wrapper<types::f77_integer, data_handling::INOUT::INOUT, ut::SORDER::ROW_MAJOR>, ut::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT");
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IN, ut::array3D_wrapper<double, data_handling::ArgIntent::IN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, IN>, double, ROW_MAJOR, IN"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, ut::array3D_wrapper<double, data_handling::ArgIntent::OUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, OUT>, double, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, ut::array3D_wrapper<double, data_handling::ArgIntent::INOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<double, INOUT>, double, ROW_MAJOR, INOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::IN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, IN>, f77_integer, ROW_MAJOR, IN"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, ut::array3D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D_wrapper<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT");
 
 #define SUPPORTED_TYPES_TO_TEST_CALLBACKS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::IN, utility::array3D<double, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::OUT, utility::array3D<double, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::INOUT, utility::array3D<double, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::IN, utility::array3D<types::f77_integer, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::OUT, utility::array3D<types::f77_integer, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, utility::array3D<types::f77_integer, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, utility::array3D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, utility::array3D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, utility::array3D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, utility::array3D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, IN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, utility::array3D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, utility::array3D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
 \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::IN, utility::array3D<double, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::OUT, utility::array3D<double, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::INOUT, utility::array3D<double, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::IN, utility::array3D<types::f77_integer, data_handling::INOUT::IN>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::OUT, utility::array3D<types::f77_integer, data_handling::INOUT::OUT>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, utility::array3D<types::f77_integer, data_handling::INOUT::INOUT>, ut::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, INOUT");
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IN, utility::array3D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, IN"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, utility::array3D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, utility::array3D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<double>, double, ROW_MAJOR, INOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, utility::array3D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, IN"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, utility::array3D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, utility::array3D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array3D<f77_integer>, f77_integer, ROW_MAJOR, INOUT");
 
 // #defines for internal types (these are not expected to be used as
 // input to NAG routines, but are leveraging some of the same tests)
 // (RawData<RT,inout> can potentially be used for local arrays, but
-// never with data_handling::IN)
+// never with data_handling::ArgIntent::IN)
 #define INTERNAL_TYPES_TO_TEST_WRAPPERS \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::OUT, data_handling::RawData<double, data_handling::INOUT::OUT>, ut::INTERNAL>("ut::RawData<double, OUT>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::INOUT::INOUT, data_handling::RawData<double, data_handling::INOUT::INOUT>, ut::INTERNAL>("ut::RawData<double, INOUT>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::OUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::OUT>, ut::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::INOUT>, ut::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::OUT, data_handling::RawData<double, data_handling::INOUT::OUT>, ut::INTERNAL>("ut::RawData<double, OUT>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::INOUT::INOUT, data_handling::RawData<double, data_handling::INOUT::INOUT>, ut::INTERNAL>("ut::RawData<double, INOUT>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::OUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::OUT>, ut::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::INOUT::INOUT, data_handling::RawData<types::f77_integer, data_handling::INOUT::INOUT>, ut::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT");
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, OUT>, double, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, INOUT>, double, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, OUT>, double, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, INOUT>, double, ROW_MAJOR, INOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT");
 
 // #define used to set up tests for types valid in main wrappers
 #define DEFINE_RUN_METHOD_WRAPPERS \
@@ -361,8 +361,8 @@ struct test_get_size_function : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 6;
@@ -383,7 +383,7 @@ struct test_get_size_function : public TestCase {
                                       n3_b);
   }
 
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, std::unique_ptr<AC> &ac_b,
                  size_t n1_a, size_t n2_a, size_t n3_a, size_t n1_b,
@@ -395,7 +395,7 @@ struct test_get_size_function : public TestCase {
     do_test<RD, inout>(local_ac_a, local_ac_b, n1_a, n2_a, n3_a, n1_b, n2_b,
                        n3_b);
   }
-  template <typename RT, enum data_handling::INOUT inout, typename AC,
+  template <typename RT, enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, std::unique_ptr<AC> &ac_b,
                  size_t n1_a, size_t n2_a, size_t n3_a, size_t n1_b,
@@ -404,7 +404,7 @@ struct test_get_size_function : public TestCase {
     do_test<AC, inout>(*ac_a, *ac_b, n1_a, n2_a, n3_a, n1_b, n2_b, n3_b);
   }
 
-  template <typename RD, enum data_handling::INOUT inout>
+  template <typename RD, enum data_handling::ArgIntent inout>
   void do_test(RD &local_ac_a, RD &local_ac_b, size_t n1_a, size_t n2_a,
                size_t n3_a, size_t n1_b, size_t n2_b, size_t n3_b) {
     nagcpp::error_handler::ErrorHandler eh;
@@ -463,8 +463,8 @@ struct test_LD_SD_TD_functions : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 10;
@@ -478,7 +478,7 @@ struct test_LD_SD_TD_functions : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, size_t n1_a, size_t n2_a,
                  size_t n3_a) ->
@@ -488,7 +488,7 @@ struct test_LD_SD_TD_functions : public TestCase {
     do_test<sorder, RD>(local_ac_a, n1_a, n2_a, n3_a);
   }
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, size_t n1_a, size_t n2_a,
                  size_t n3_a) ->
@@ -530,8 +530,8 @@ struct test_get_storage_order_function : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 10;
@@ -545,7 +545,7 @@ struct test_get_storage_order_function : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, size_t n1_a, size_t n2_a,
                  size_t n3_a) ->
@@ -555,7 +555,7 @@ struct test_get_storage_order_function : public TestCase {
     do_test<sorder, RD>(local_ac_a, n1_a, n2_a, n3_a);
   }
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac_a, size_t n1_a, size_t n2_a,
                  size_t n3_a) ->
@@ -581,8 +581,8 @@ struct test_check_function : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 5;
@@ -595,7 +595,7 @@ struct test_check_function : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -605,7 +605,7 @@ struct test_check_function : public TestCase {
     do_test<sorder, RD>(local_ac, n1_a, n2_a, n3_a);
   }
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -712,8 +712,8 @@ struct test_data_variable : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 11;
@@ -726,7 +726,7 @@ struct test_data_variable : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -736,7 +736,7 @@ struct test_data_variable : public TestCase {
     do_test<sorder, RT, RD>(local_ac, n1_a, n2_a, n3_a);
   }
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -763,16 +763,16 @@ struct test_get_data_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::is_internal_type<type_is>::value, void>::type {
     // don't run the get_data method on internal arrays
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::is_internal_type<type_is>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -824,8 +824,8 @@ struct test_array_referencing_overload : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   void run_this(std::string label = "") {
     SUB_TITLE(label);
     static const size_t n1_a = 3;
@@ -838,7 +838,7 @@ struct test_array_referencing_overload : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -848,7 +848,7 @@ struct test_array_referencing_overload : public TestCase {
     do_test<RT, RD>(local_ac, n1_a, n2_a, n3_a);
   }
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
+            enum data_handling::ArgIntent inout, typename AC,
             enum ut::TYPE_IS type_is>
   auto call_test(std::unique_ptr<AC> &ac, size_t n1_a, size_t n2_a, size_t n3_a)
     ->
@@ -882,16 +882,16 @@ struct test_allocate_local_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value, void>::type {
     // allocate_local should never be called on an input array
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!data_handling::is_in<inout>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -928,8 +928,8 @@ struct test_resize_method : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::has_resize<inout, type_is>::value,
                             void>::type {
@@ -938,8 +938,8 @@ struct test_resize_method : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::has_resize<inout, type_is>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -1014,8 +1014,8 @@ struct test_copy_back_method_array_preallocated : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value ||
                               ut::is_internal_type<type_is>::value,
@@ -1024,8 +1024,8 @@ struct test_copy_back_method_array_preallocated : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!(data_handling::is_in<inout>::value ||
                               ut::is_internal_type<type_is>::value),
@@ -1136,8 +1136,8 @@ struct test_copy_back_method_array_not_preallocated : public TestCase {
   DEFINE_RUN_METHOD_WRAPPERS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<!ut::has_resize<inout, type_is>::value,
                             void>::type {
@@ -1145,8 +1145,8 @@ struct test_copy_back_method_array_not_preallocated : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<ut::has_resize<inout, type_is>::value, void>::type {
     using RD = data_handling::RawData<RT, inout, AC>;
@@ -1257,17 +1257,17 @@ REGISTER_TEST(test_copy_back_method_array_not_preallocated, "Test method to copy
 // clang-format on
 // ... tests related to using the type as an argument to a NAG routine
 
-template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout,
-          typename AC, enum ut::TYPE_IS type_is = ut::GENERAL>
+template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout,
+          typename AC, enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_in(const RT *x, const size_t n1_a, const size_t n2_a,
                       const size_t n3_a, bool &meta_info_ok, RT &max_diff) {
   // pack raw data into utility::array3D
-  utility::array3D<RT, data_handling::INOUT::IN> local_x(
+  utility::array3D<RT, data_handling::ArgIntent::IN> local_x(
     x, n1_a, n2_a, n3_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array3D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    const utility::array3D<RT, data_handling::INOUT::IN>, inout, AC>(local_x);
+    const utility::array3D<RT, data_handling::ArgIntent::IN>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input argument ...
   // check that the users type has the correct meta information
@@ -1282,17 +1282,17 @@ void pseudo_helper_in(const RT *x, const size_t n1_a, const size_t n2_a,
   // ... simulate calling a callback with X as an input argument
 }
 
-template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout,
-          typename AC, enum ut::TYPE_IS type_is = ut::GENERAL>
+template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout,
+          typename AC, enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_out(RT *x, const size_t n1_a, const size_t n2_a,
                        const size_t n3_a, bool &meta_info_ok) {
   // pack raw data into utility::array3D
-  utility::array3D<RT, data_handling::INOUT::OUT> local_x(
+  utility::array3D<RT, data_handling::ArgIntent::OUT> local_x(
     x, n1_a, n2_a, n3_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array3D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array3D<RT, data_handling::INOUT::OUT>, inout, AC>(local_x);
+    utility::array3D<RT, data_handling::ArgIntent::OUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an output argument ...
   // check that the users type has the correct meta information
@@ -1304,17 +1304,17 @@ void pseudo_helper_out(RT *x, const size_t n1_a, const size_t n2_a,
   // ... simulate calling a callback with X as an output argument
 }
 
-template <enum ut::SORDER sorder, typename RT, enum data_handling::INOUT inout,
-          typename AC, enum ut::TYPE_IS type_is = ut::GENERAL>
+template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent inout,
+          typename AC, enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_inout(RT *x, const size_t n1_a, const size_t n2_a,
                          const size_t n3_a, bool &meta_info_ok, RT &max_diff) {
   // pack raw data into utility::array3D
-  utility::array3D<RT, data_handling::INOUT::INOUT> local_x(
+  utility::array3D<RT, data_handling::ArgIntent::INOUT> local_x(
     x, n1_a, n2_a, n3_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array3D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array3D<RT, data_handling::INOUT::INOUT>, inout, AC>(local_x);
+    utility::array3D<RT, data_handling::ArgIntent::INOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input / output argument ...
   // check that the users type has the correct meta information
@@ -1341,8 +1341,8 @@ struct test_convert_nag_array_to_user : public TestCase {
   DEFINE_RUN_METHOD_CALLBACKS
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_in<inout>::value, void>::type {
     SUB_TITLE(label);
@@ -1363,8 +1363,8 @@ struct test_convert_nag_array_to_user : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_out<inout>::value, void>::type {
     SUB_TITLE(label);
@@ -1389,8 +1389,8 @@ struct test_convert_nag_array_to_user : public TestCase {
   }
 
   template <enum ut::SORDER sorder, typename RT,
-            enum data_handling::INOUT inout, typename AC,
-            enum ut::TYPE_IS type_is = ut::GENERAL>
+            enum data_handling::ArgIntent inout, typename AC,
+            enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
   auto run_this(std::string label = "") ->
     typename std::enable_if<data_handling::is_inout<inout>::value, void>::type {
     SUB_TITLE(label);

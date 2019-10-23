@@ -11,7 +11,7 @@ using namespace nagcpp;
 struct test_float_to_double : public TestCase {
   void run() override {
     std::vector<float> vf = ut::get_expected_values<float>(20);
-    data_handling::RawData<double, data_handling::INOUT, std::vector<float>> rd(
+    data_handling::RawData<double, data_handling::ArgIntent::INOUT, std::vector<float>> rd(
       vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
 
@@ -27,7 +27,7 @@ REGISTER_TEST(test_float_to_double, "Test float to double");
 struct test_int_to_double : public TestCase {
   void run() override {
     std::vector<int> vf = ut::get_expected_values<int>(20);
-    data_handling::RawData<double, data_handling::INOUT, std::vector<int>> rd(
+    data_handling::RawData<double, data_handling::ArgIntent::INOUT, std::vector<int>> rd(
       vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
 
@@ -43,7 +43,7 @@ REGISTER_TEST(test_int_to_double, "Test int to double");
 struct test_int_to_f77_integer : public TestCase {
   void run() override {
     std::vector<int> vf = ut::get_expected_values<int>(20);
-    data_handling::RawData<types::f77_integer, data_handling::INOUT,
+    data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT,
                            std::vector<int>>
       rd(vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
@@ -60,7 +60,7 @@ REGISTER_TEST(test_int_to_f77_integer, "Test int to f77_integer");
 struct test_long_to_f77_integer : public TestCase {
   void run() override {
     std::vector<long> vf = ut::get_expected_values<long>(20);
-    data_handling::RawData<types::f77_integer, data_handling::INOUT,
+    data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT,
                            std::vector<long>>
       rd(vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
@@ -77,7 +77,7 @@ REGISTER_TEST(test_long_to_f77_integer, "Test long to f77_integer");
 struct test_uint_to_f77_integer : public TestCase {
   void run() override {
     std::vector<unsigned int> vf = ut::get_expected_values<unsigned int>(20);
-    data_handling::RawData<types::f77_integer, data_handling::INOUT,
+    data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT,
                            std::vector<unsigned int>>
       rd(vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
@@ -94,7 +94,7 @@ REGISTER_TEST(test_uint_to_f77_integer, "Test unsigned long to f77_integer");
 struct test_ulong_to_f77_integer : public TestCase {
   void run() override {
     std::vector<unsigned long> vf = ut::get_expected_values<unsigned long>(20);
-    data_handling::RawData<types::f77_integer, data_handling::INOUT,
+    data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT,
                            std::vector<unsigned long>>
       rd(vf);
     ASSERT_ARRAY_EQUAL(vf.size(), vf.data(), rd.data);
