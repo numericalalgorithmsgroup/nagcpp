@@ -80,7 +80,7 @@ public:
   // required method for all data classes passed to a
   // library routine
   DT *data(void) { return raw_data; }
-  DT *data(void) const { return raw_data; }
+  const DT *data(void) const { return raw_data; }
 
   // not required, but included as it keeps notation in examples
   // consistent with the 2D case

@@ -103,7 +103,7 @@ public:
   // required method for all data classes passed to a
   // library routine
   DT *data(void) { return raw_data; }
-  DT *data(void) const { return raw_data; }
+  const DT *data(void) const { return raw_data; }
 
   // not required, but makes the example easier to read
   // allows element A_ij of the matrix to be accessed using

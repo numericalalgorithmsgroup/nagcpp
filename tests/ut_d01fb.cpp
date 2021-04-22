@@ -3,6 +3,7 @@
 #include "include/cxxunit_testing.hpp"
 #include "utility/nagcpp_error_handler.hpp"
 #include <vector>
+#include <type_traits>
 
 using namespace nagcpp;
 
@@ -112,6 +113,11 @@ std::function<double(const utility::array1D<double, data_handling::ArgIntent::IN
   };
 // functor
 struct functor_arr {
+  explicit functor_arr() {}
+  functor_arr(const functor_arr& rhs) = delete;
+  functor_arr(functor_arr&& rhs) = delete;
+  functor_arr& operator=(const functor_arr& rhs) = delete;
+  functor_arr& operator=(functor_arr&& rhs) = delete;
   double operator()(const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
     return f_base(x);
   }
@@ -126,8 +132,12 @@ private:
   double p1, p2;
 
 public:
-  functor_data_arr() : p1(0), p2(0) {}
-  functor_data_arr(double p1_, double p2_) : p1(p1_), p2(p2_) {}
+  explicit functor_data_arr() : p1(0), p2(0) {}
+  explicit functor_data_arr(double p1_, double p2_) : p1(p1_), p2(p2_) {}
+  functor_data_arr(const functor_data_arr& rhs) = delete;
+  functor_data_arr(functor_data_arr&& rhs) = delete;
+  functor_data_arr& operator=(const functor_data_arr& rhs) = delete;
+  functor_data_arr& operator=(functor_data_arr&& rhs) = delete;
   double operator()(const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
     return f_base(x, p1, p2);
   }
@@ -142,6 +152,11 @@ std::function<double(const std::vector<double> &x)> function_std =
   [](const std::vector<double> &x) { return f_base(x); };
 // functor
 struct functor_std {
+  explicit functor_std() {}
+  functor_std(const functor_std& rhs) = delete;
+  functor_std(functor_std&& rhs) = delete;
+  functor_std& operator=(const functor_std& rhs) = delete;
+  functor_std& operator=(functor_std&& rhs) = delete;
   double operator()(const std::vector<double> &x) { return f_base(x); }
 };
 // lambda function
@@ -153,8 +168,12 @@ private:
   double p1, p2;
 
 public:
-  functor_data_std() : p1(0), p2(0) {}
-  functor_data_std(double p1_, double p2_) : p1(p1_), p2(p2_) {}
+  explicit functor_data_std() : p1(0), p2(0) {}
+  explicit functor_data_std(double p1_, double p2_) : p1(p1_), p2(p2_) {}
+  functor_data_std(const functor_data_std& rhs) = delete;
+  functor_data_std(functor_data_std&& rhs) = delete;
+  functor_data_std& operator=(const functor_data_std& rhs) = delete;
+  functor_data_std& operator=(functor_data_std&& rhs) = delete;
   double operator()(const std::vector<double> &x) { return f_base(x, p1, p2); }
 };
 // ... functor with data
@@ -164,6 +183,12 @@ struct test_different_calling_types : public TestCase {
   void run() override {
     {
       SUB_TITLE("std::vector as input arguments");
+
+
+      // (void) quad::md_gauss(example::nptvec, example::weight,
+      //                                       example::abscis, functor_std());
+
+      // double mdint_clike = 0.2506470386732621014;
       double mdint_clike = quad::md_gauss(example::nptvec, example::weight,
                                           example::abscis, clike_std);
       double mdint_function = quad::md_gauss(example::nptvec, example::weight,

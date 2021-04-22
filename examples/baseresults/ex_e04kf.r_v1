@@ -1,25 +1,30 @@
 nagcpp::opt::handle_solve_bounds_foas Example
 
- -------------------------------------------------------------------------------
-  E04KF, First order method for bound-constrained problems                      
- -------------------------------------------------------------------------------
+ E04KF, First order method for bound-constrained problems                       
                                                                                                     
  Status: converged, an optimal solution was found                                                   
  Value of the objective             4.00000E-02                                                     
  Norm of inactive gradient          0.00000E+00                                                     
  Norm of projected direction        0.00000E+00                                                     
                                                                                 
- Variables:                                                                     
-     idx    lower bound       value       upper bound       gradient            
-       1   -1.00000E+00    8.00000E-01    8.00000E-01   -4.00000E-01            
-       2   -2.00000E+00    6.40000E-01    2.00000E+00    0.00000E+00            
+ Primal variables:                                                              
+   idx   Lower bound       Value       Upper bound                              
+     1  -1.00000E+00    8.00000E-01    8.00000E-01                              
+     2  -2.00000E+00    6.40000E-01    2.00000E+00                              
+                                                                                
+ Box bounds dual variables:                                                     
+   idx   Lower bound       Value       Upper bound       Value                  
+     1  -1.00000E+00    0.00000E+00    8.00000E-01    4.00000E-01               
+     2  -2.00000E+00    0.00000E+00    2.00000E+00    0.00000E+00               
 Solution found: 
    Objective function value at solution:   4.0e-02
 
 Monitoring Information:
- -------------------------------------------------------------------------------
+                                                                                
+ ----------------------------------------------------------                     
   E04KF, First order method for bound-constrained problems                      
- -------------------------------------------------------------------------------
+ ----------------------------------------------------------                     
+                                                                                
  Begin of Options                                                               
      Print File                    =                   6     * d                
      Print Level                   =                   1     * U                
@@ -48,14 +53,12 @@ Monitoring Information:
      Foas Tolerance Norm           =            Infinity     * d                
  End of Options                                                                 
                                                                                 
- Problem statistics                                                             
-     Number of variables                                       2                
-     Number of free variables                                  0                
-     Number of fixed variables                                 0                
-     Number of variables with only lower bound                 0                
-     Number of variables with only upper bound                 0                
-     Number of variables with bounds                           2                
-     Objective type                                    Nonlinear                
+ Problem Statistics                                                                                                                                                                                     
+   No of variables                  2                                                                                                                                                                   
+     free (unconstrained)           0                                                                                                                                                                   
+     bounded                        2                                                                                                                                                                   
+   Objective function       Nonlinear                                                                                                                                                                   
+                                                                                                                                                                                                        
                                                                                                     
  -------------------------------------------------------------------------------                    
    iters |  objective |  optim  |   dir   | progrss | it|   step  |    nf|    ng                    
@@ -89,8 +92,13 @@ Monitoring Information:
    LCG gradient calls                        32                                                     
  -------------------------------------------------------------------------------                    
                                                                                 
- Variables:                                                                     
-     idx    lower bound       value       upper bound       gradient            
-       1   -1.00000E+00    8.00000E-01    8.00000E-01   -4.00000E-01            
-       2   -2.00000E+00    6.40000E-01    2.00000E+00    0.00000E+00            
+ Primal variables:                                                              
+   idx   Lower bound       Value       Upper bound                              
+     1  -1.00000E+00    8.00000E-01    8.00000E-01                              
+     2  -2.00000E+00    6.40000E-01    2.00000E+00                              
+                                                                                
+ Box bounds dual variables:                                                     
+   idx   Lower bound       Value       Upper bound       Value                  
+     1  -1.00000E+00    0.00000E+00    8.00000E-01    4.00000E-01               
+     2  -2.00000E+00    0.00000E+00    2.00000E+00    0.00000E+00               
 

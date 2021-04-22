@@ -801,6 +801,7 @@ struct test_array_referencing_overload : public TestCase {
     for (size_t j = 0, p = 0; j < n2_a && passed; ++j) {
       for (size_t i = 0; i < n1_a && passed; ++i, ++p) {
         ASSERT_EQUAL_ONLY_COUNT_FAILURE(local_ac(i, j), expected_results[p]);
+        passed = last_assert_passed;
       }
     }
     ASSERT_TRUE_LABELLED("local_ac vs expected_results", passed);

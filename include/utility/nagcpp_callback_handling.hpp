@@ -145,6 +145,11 @@ namespace nagcpp {
     inline void *function_to_void_pointer(CB &f) {
       return static_cast<void *>(std::addressof(f));
     }
+    // XXXX is this always portable??
+    template <typename CB>
+    inline void *function_to_void_pointer(CB *f) {
+      return (void *) f;
+    }
     template <>
     inline void *function_to_void_pointer(std::nullptr_t &f) {
       return static_cast<void *>(nullptr);

@@ -20,13 +20,13 @@
 #include "e04/nagcpp_e04rh.hpp"
 
 void objfun(const std::vector<double> &x, double &fx,
-            const nagcpp::types::f77_integer inform) {
+            nagcpp::types::f77_integer inform) {
   // Rosenbrock function
   fx = pow(1.0 - x[0], 2) + 100.0 * pow(x[1] - pow(x[0], 2), 2);
 }
 
 void objgrd(const std::vector<double> &x, std::vector<double> &fdx,
-            const nagcpp::types::f77_integer inform) {
+            nagcpp::types::f77_integer inform) {
   fdx[0] = 2.0 * x[0] - 400.0 * x[0] * (x[1] - pow(x[0], 2)) - 2.0;
   fdx[1] = 200.0 * (x[1] - pow(x[0], 2));
 }

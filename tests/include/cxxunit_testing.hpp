@@ -282,6 +282,7 @@
   do { \
     auto _v1 = (e1); \
     auto _v2 = (e2); \
+    last_assert_passed = true; \
     bool _passed = do_assert(std::fabs(_v1 - _v2) <= 0.0); \
     if (!_passed) { \
       PRINT_ERROR(_passed); \
@@ -635,6 +636,17 @@ struct TestCase {
       add_sub_test = false;
       std::cerr << INDENT_STRING1 << "*** " << sub_test << std::endl;
     }
+  }
+
+  void print_additional_test_details(bool passed, const std::string text, const bool when_failed_only=false) {
+    // this can be used in a unit test to print some additional
+    // test details
+    if (display_line_details(passed) && (!when_failed_only || !passed)) {
+      std::cerr << INDENT_STRING2 << text << std::endl;
+    }
+  }
+  void print_additional_test_details(const std::string text, const bool when_failed_only=false) {
+    print_additional_test_details(last_assert_passed, text, when_failed_only);
   }
 
   void print_error(bool passed, const std::string desc1,

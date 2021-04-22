@@ -27,14 +27,14 @@
 #include "e04/nagcpp_e04st.hpp"
 
 void confun(const std::vector<double> &x,
-            const nagcpp::types::f77_integer ncnln, std::vector<double> &gx) {
+            const nagcpp::types::f77_integer ncnln, std::vector<double> &gx,
+            nagcpp::types::f77_integer inform) {
   gx[0] = 12.0 * x[0] + 11.9 * x[1] + 41.8 * x[2] + 52.1 * x[3] -
           1.645 * std::sqrt(0.28 * pow(x[0], 2) + 0.19 * pow(x[1], 2) +
                             20.5 * pow(x[2], 2) + 0.62 * pow(x[3], 2));
 }
-
 void congrd(const std::vector<double> &x,
-            const nagcpp::types::f77_integer nnzgd, std::vector<double> &gdx) {
+            std::vector<double> &gdx, const nagcpp::types::f77_integer nnzgd) {
   double tmp = std::sqrt(0.62 * pow(x[3], 2) + 20.5 * pow(x[2], 2) +
                          0.19 * pow(x[1], 2) + 0.28 * pow(x[0], 2));
   gdx[0] = (12.0 * tmp - 0.4606 * x[0]) / tmp;
@@ -44,7 +44,8 @@ void congrd(const std::vector<double> &x,
 }
 void hess(const std::vector<double> &x, const nagcpp::types::f77_integer idf,
           const double sigma, const std::vector<double> &lamda,
-          const nagcpp::types::f77_integer nnzh, std::vector<double> &hx) {
+          const nagcpp::types::f77_integer nnzh, std::vector<double> &hx,
+          nagcpp::types::f77_integer inform) {
   bool terminate = true;
   std::fill(hx.begin(), hx.end(), 0.0);
 

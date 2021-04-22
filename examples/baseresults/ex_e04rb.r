@@ -1,9 +1,5 @@
 nagcpp::opt::handle_solve_socp_ipm Example
-                                                                                
- ------------------------------------------------                               
-  E04PT, Interior point method for SOCP problems                                
- ------------------------------------------------                               
-                                                                                
+ E04PT, Interior point method for SOCP problems                                 
  Begin of Options                                                               
      Print File                    =                   6     * d                
      Print Level                   =                   1     * U                
@@ -26,6 +22,7 @@ nagcpp::opt::handle_solve_socp_ipm Example
      Socp Stop Tolerance 2         =         1.05367E-08     * d                
      Socp System Formulation       =                Auto     * d                
  End of Options                                                                 
+                                                                                
  Status: converged, an optimal solution found                                   
  Final primal objective value -1.951817E+01                                     
  Final dual objective value   -1.951817E+01                                     

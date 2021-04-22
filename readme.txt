@@ -1,7 +1,7 @@
-This is version 27.0.0.1 of a set of C++11 interfaces for the NAG Library,
+This is version 27.1.0.0 of a set of C++11 interfaces for the NAG Library,
 supplied as a series of header files.
 
-In order to make use of this product you will need a copy of Mark 27.0 of the
+In order to make use of this product you will need a copy of Mark 27.1 of the
 NAG Library installed on your system.
 
 Currently only interfaces for a small subset of routines from the NAG Library are
@@ -10,7 +10,7 @@ primary purpose is to elicit feedback on their design prior to rolling the
 process out across the whole library.
 
 A more comprehensive set of documentation is available from the NAG website:
-https://www.nag.com/numeric/nl/nagdoc_27cpp/cpphtml/frontmatter/manconts.html
+https://www.nag.com/numeric/nl/nagdoc_27.1/cpphtml/frontmatter/manconts.html
 
 Assuming that you have installed the C++ interfaces into the directory called
 [NAGCPP_INSTALL_DIR] then you should have four subdirectories:

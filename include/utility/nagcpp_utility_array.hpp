@@ -25,7 +25,7 @@ namespace nagcpp {
       array1D(const array1D &) = delete;
 
       CRT *data(void) { return raw_data; }
-      CRT *data(void) const { return raw_data; }
+      const CRT *data(void) const { return raw_data; }
 
       types::f77_integer size1(void) const { return asize1; }
       types::f77_integer ndims(void) const { return 1; }
@@ -80,7 +80,7 @@ namespace nagcpp {
       array2D(const array2D &) = delete;
 
       CRT *data(void) { return raw_data; }
-      CRT *data(void) const { return raw_data; }
+      const CRT *data(void) const { return raw_data; }
 
       types::f77_integer size1(void) const { return asize1; }
       types::f77_integer size2(void) const { return asize2; }
@@ -152,7 +152,7 @@ namespace nagcpp {
       array3D(const array3D &) = delete;
 
       CRT *data(void) { return raw_data; }
-      CRT *data(void) const { return raw_data; }
+      const CRT *data(void) const { return raw_data; }
 
       types::f77_integer size1(void) const { return asize1; }
       types::f77_integer size2(void) const { return asize2; }

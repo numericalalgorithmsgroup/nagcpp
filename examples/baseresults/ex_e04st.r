@@ -8,6 +8,7 @@ nagcpp::opt::handle_solve_lp_ipm Example
    Linear constraints:      2                                                   
    Nonlinear constraints:   1                                                   
    Cone constraints:        not defined yet                                     
+   Quadratic constraints:   not defined yet                                     
    Matrix constraints:      not defined yet                                     
 
 Variables
@@ -33,8 +34,8 @@ Nonlinear constraints Lagrange multipliers
      l-(         0)                =        4.105411e-01
      l+(         0)                =        0.000000e+00
 At solution, Objective minimum     =       2.9894378e+01
-             Constraint violation  =            1.11e-16
-             Dual infeasibility    =            6.71e-12
+             Constraint violation  =            0.00e+00
+             Dual infeasibility    =            6.72e-12
              Complementarity       =            2.56e-09
              KKT error             =            2.56e-09
 Solution took less than 10 seconds
