@@ -66,7 +66,7 @@ ifeq ($(PLATOS),"WINDOWS")
   endif
 
   NAGLIB_LINK := nag_nag_MD.lib user32.lib
-  NAGLIB_CXXFLAGS := /EHsc /MD
+  NAGLIB_CXXFLAGS := /EHs /MD
   NAMEOBJ := -Fo:
 
   ifeq ($(USE_VS),1)
