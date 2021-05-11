@@ -40,4 +40,4 @@ directory [NAGCPP_INSTALL_DIR]/include to the list of directories your compiler
 searches for header files in addition to using any compiler flags usually
 required by the NAG Library (as specified in the Users' Notes supplied with your
 version of the library and also available from the NAG website at
-https://www.nag.co.uk/content/nag-library-mark-27).
+https://www.nag.com/content/nag-library-mark-27).
