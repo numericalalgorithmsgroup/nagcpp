@@ -72,9 +72,9 @@ int main(void) {
     std::string ptype = "Primal-Dual";
     auto monit =
       [&](nagcpp::opt::CommE04RA &comm,
-          const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IN>
+          const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IntentIN>
             &rinfo,
-          const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IN>
+          const nagcpp::utility::array1D<double, nagcpp::data_handling::ArgIntent::IntentIN>
             &stats) {
         double tol = 1.2e-8;
         bool good_solution;

@@ -194,11 +194,11 @@ struct convert_nag_array_to_user_t<utility::array2D<RT, inout>, inout,
 ;
 
 template <typename RT, typename SO>
-struct convert_nag_array_to_user_t<const utility::array2D<RT, IN>, IN,
+struct convert_nag_array_to_user_t<const utility::array2D<RT, IntentIN>, IntentIN,
                                    boost::numeric::ublas::matrix<RT, SO>> {
-  static const nag_2D_array_to_boost_matrix<RT, IN, SO>
-    get(const utility::array2D<RT, IN> &nag_array) {
-    return nag_2D_array_to_boost_matrix<RT, IN, SO>(nag_array);
+  static const nag_2D_array_to_boost_matrix<RT, IntentIN, SO>
+    get(const utility::array2D<RT, IntentIN> &nag_array) {
+    return nag_2D_array_to_boost_matrix<RT, IntentIN, SO>(nag_array);
   }
 };
 // ... handle conversion of NAG array to boost::numeric::ublas::matrix

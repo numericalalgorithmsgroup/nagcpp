@@ -1,6 +1,6 @@
 # C++11 Interfaces for the NAG Library
 
-This is version 27.2.0.0 of a set of C++11 interfaces for the NAG Library,
+This is version 27.2.1.0 of a set of C++11 interfaces for the NAG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of

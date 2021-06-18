@@ -5,18 +5,18 @@
 // boost types to run through tests in ut_data_handling_1D.cpp ...
 // clang-format off
 #define BOOST_1D_TYPES_TO_TEST_WRAPPERS \
-run_this<double, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
-run_this<double, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
-run_this<double, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
-run_this<double, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<double>>("boost vector, double, IN"); \
-run_this<double, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<double>>("boost vector, double, OUT"); \
-run_this<double, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<double>>("boost vector, double, INOUT"); \
-run_this<types::f77_integer, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
-run_this<types::f77_integer, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
-run_this<types::f77_integer, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT"); \
-run_this<types::f77_integer, data_handling::ArgIntent::IN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IN"); \
-run_this<types::f77_integer, data_handling::ArgIntent::OUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, OUT"); \
-run_this<types::f77_integer, data_handling::ArgIntent::INOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, INOUT");
+run_this<double, data_handling::ArgIntent::IntentIN, boost::numeric::ublas::vector<double>>("boost vector, double, IntentIN"); \
+run_this<double, data_handling::ArgIntent::IntentOUT, boost::numeric::ublas::vector<double>>("boost vector, double, IntentOUT"); \
+run_this<double, data_handling::ArgIntent::IntentINOUT, boost::numeric::ublas::vector<double>>("boost vector, double, IntentINOUT"); \
+run_this<double, data_handling::ArgIntent::IntentIN, boost::numeric::ublas::vector<double>>("boost vector, double, IntentIN"); \
+run_this<double, data_handling::ArgIntent::IntentOUT, boost::numeric::ublas::vector<double>>("boost vector, double, IntentOUT"); \
+run_this<double, data_handling::ArgIntent::IntentINOUT, boost::numeric::ublas::vector<double>>("boost vector, double, IntentINOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentIN"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentINOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentIN"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentOUT"); \
+run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, boost::numeric::ublas::vector<types::f77_integer>>("boost vector, f77_integer, IntentINOUT");
 
 #define BOOST_1D_TYPES_TO_TEST_CALLBACKS \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS

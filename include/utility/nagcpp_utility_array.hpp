@@ -6,7 +6,7 @@
 namespace nagcpp {
   namespace utility {
     template <typename RT,
-              enum data_handling::ArgIntent inout = data_handling::ArgIntent::INOUT>
+              enum data_handling::ArgIntent inout = data_handling::ArgIntent::IntentINOUT>
     class array1D {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;
 
@@ -49,7 +49,7 @@ namespace nagcpp {
     };
 
     template <typename RT,
-              enum data_handling::ArgIntent inout = data_handling::ArgIntent::INOUT>
+              enum data_handling::ArgIntent inout = data_handling::ArgIntent::IntentINOUT>
     class array2D {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;
 
@@ -115,7 +115,7 @@ namespace nagcpp {
     };
 
     template <typename RT,
-              enum data_handling::ArgIntent inout = data_handling::ArgIntent::INOUT>
+              enum data_handling::ArgIntent inout = data_handling::ArgIntent::IntentINOUT>
     class array3D {
       using CRT = typename data_handling::add_const_if_in<RT, inout>::type;
 

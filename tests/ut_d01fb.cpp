@@ -103,12 +103,12 @@ REGISTER_TEST(test_simple_example, "Test simple example");
 
 // NAG defined type as its arguments ...
 // C like function
-double clike_arr(const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+double clike_arr(const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
   return f_base(x);
 }
 // C++ std::function
-std::function<double(const utility::array1D<double, data_handling::ArgIntent::IN> &x)>
-  function_arr = [](const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+std::function<double(const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x)>
+  function_arr = [](const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
     return f_base(x);
   };
 // functor
@@ -118,12 +118,12 @@ struct functor_arr {
   functor_arr(functor_arr&& rhs) = delete;
   functor_arr& operator=(const functor_arr& rhs) = delete;
   functor_arr& operator=(functor_arr&& rhs) = delete;
-  double operator()(const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+  double operator()(const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
     return f_base(x);
   }
 };
 // lambda function
-auto lambda_arr = [](const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+auto lambda_arr = [](const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
   return f_base(x);
 };
 // functor with data
@@ -138,7 +138,7 @@ public:
   functor_data_arr(functor_data_arr&& rhs) = delete;
   functor_data_arr& operator=(const functor_data_arr& rhs) = delete;
   functor_data_arr& operator=(functor_data_arr&& rhs) = delete;
-  double operator()(const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+  double operator()(const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
     return f_base(x, p1, p2);
   }
 };
@@ -217,11 +217,11 @@ struct test_different_calling_types : public TestCase {
     }
     {
       SUB_TITLE("array1D as input arguments");
-      utility::array1D<types::f77_integer, data_handling::ArgIntent::IN> nptvec(
+      utility::array1D<types::f77_integer, data_handling::ArgIntent::IntentIN> nptvec(
         example::nptvec.data(), example::nptvec.size());
-      utility::array1D<double, data_handling::ArgIntent::IN> weight(
+      utility::array1D<double, data_handling::ArgIntent::IntentIN> weight(
         example::weight.data(), example::weight.size());
-      utility::array1D<double, data_handling::ArgIntent::IN> abscis(
+      utility::array1D<double, data_handling::ArgIntent::IntentIN> abscis(
         example::abscis.data(), example::abscis.size());
       double mdint_clike = quad::md_gauss(nptvec, weight, abscis, clike_arr);
       double mdint_function =
@@ -235,7 +235,7 @@ struct test_different_calling_types : public TestCase {
       double my_p1 = example::p1;
       double my_p2 = example::p2;
       auto lambda_data =
-        [&](const utility::array1D<double, data_handling::ArgIntent::IN> &x) {
+        [&](const utility::array1D<double, data_handling::ArgIntent::IntentIN> &x) {
           return f_base(x, my_p1, my_p2);
         };
       double mdint_lambda_data =
@@ -250,11 +250,11 @@ struct test_different_calling_types : public TestCase {
     }
     {
       SUB_TITLE("mix of array1D and std::vector as input arguments");
-      utility::array1D<types::f77_integer, data_handling::ArgIntent::IN> nptvec(
+      utility::array1D<types::f77_integer, data_handling::ArgIntent::IntentIN> nptvec(
         example::nptvec.data(), example::nptvec.size());
-      utility::array1D<double, data_handling::ArgIntent::IN> weight(
+      utility::array1D<double, data_handling::ArgIntent::IntentIN> weight(
         example::weight.data(), example::weight.size());
-      utility::array1D<double, data_handling::ArgIntent::IN> abscis(
+      utility::array1D<double, data_handling::ArgIntent::IntentIN> abscis(
         example::abscis.data(), example::abscis.size());
       double mdint_clike =
         quad::md_gauss(example::nptvec, weight, example::abscis, clike_std);

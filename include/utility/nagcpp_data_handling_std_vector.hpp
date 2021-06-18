@@ -75,11 +75,11 @@ namespace nagcpp {
   };
 
   template <typename RT, typename ALLOCATOR>
-  struct convert_nag_array_to_user_t<const utility::array1D<RT, IN>, IN,
+  struct convert_nag_array_to_user_t<const utility::array1D<RT, IntentIN>, IntentIN,
                                      std::vector<RT, ALLOCATOR>> {
-    static const nag_1D_array_to_std_vector<RT, IN, ALLOCATOR>
-      get(const utility::array1D<RT, IN> &nag_array) {
-      return nag_1D_array_to_std_vector<RT, IN, ALLOCATOR>(nag_array);
+    static const nag_1D_array_to_std_vector<RT, IntentIN, ALLOCATOR>
+      get(const utility::array1D<RT, IntentIN> &nag_array) {
+      return nag_1D_array_to_std_vector<RT, IntentIN, ALLOCATOR>(nag_array);
     }
   };
   // ... handle conversion of NAG array to std::vector

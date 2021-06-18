@@ -93,7 +93,7 @@ using namespace nagcpp;
 
 // NB: this test suite runs:
 //   11 tests on types used in wrappers
-//      of which only 7 are run on data_handling::ArgIntent::IN classes
+//      of which only 7 are run on data_handling::ArgIntent::IntentIN classes
 //      (or internal ones) and (max of) 9 are run if ut::has_resize
 //      is false
 //    1 test on types used in callbacks
@@ -264,60 +264,60 @@ struct test_setup {
 // data class that can be used by the NAG interfaces (see example directory)
 // the array2D_wrapper class is a wrapper around array2D
 #define SUPPORTED_TYPES_TO_TEST_WRAPPERS \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, MyData<double>>("MyData<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, MyData<double>>("MyData<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, MyData<double>>("MyData<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, ut::array2D_wrapper<double, data_handling::ArgIntent::IN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IN>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, ut::array2D_wrapper<double, data_handling::ArgIntent::OUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, OUT>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::INOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, INOUT>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IN>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IN, ut::array2D_wrapper<double, data_handling::ArgIntent::IN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IN>, double, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, ut::array2D_wrapper<double, data_handling::ArgIntent::OUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, OUT>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::INOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, INOUT>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IN>, f77_integer, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentIN, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentOUT, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentINOUT, MyMatrix<double>>("MyMatrix<double>, double, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, MyMatrix<types::f77_integer>>("MyMatrix<f77_integer>, f77_integer, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentIN, MyData<double>>("MyData<double>, double, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentOUT, MyData<double>>("MyData<double>, double, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentINOUT, MyData<double>>("MyData<double>, double, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentIN, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentIN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentIN>, double, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentOUT>, double, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentINOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentINOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentINOUT>, double, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentIN, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentIN>, f77_integer, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentOUT>, f77_integer, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentINOUT, ut::SORDER::COL_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentINOUT>, f77_integer, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentIN, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentIN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentIN>, double, ROW_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentOUT>, double, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentINOUT, ut::array2D_wrapper<double, data_handling::ArgIntent::IntentINOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<double, IntentINOUT>, double, ROW_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentIN, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentIN>, f77_integer, ROW_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentOUT>, f77_integer, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, ut::array2D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentINOUT, ut::SORDER::ROW_MAJOR>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D_wrapper<f77_integer, IntentINOUT>, f77_integer, ROW_MAJOR, IntentINOUT"); \
   BOOST_2D_TYPES_TO_TEST_WRAPPERS
 
 #define SUPPORTED_TYPES_TO_TEST_CALLBACKS \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IN, utility::array2D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, utility::array2D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, utility::array2D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, utility::array2D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, IN"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IN, utility::array2D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, utility::array2D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, utility::array2D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IN, utility::array2D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, IN"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, INOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentIN, utility::array2D<double, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentOUT, utility::array2D<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentINOUT, utility::array2D<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentIN, utility::array2D<double, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentOUT, utility::array2D<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentINOUT, utility::array2D<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<double>, double, ROW_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentIN, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, IntentIN"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, utility::array2D<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array2D<f77_integer>, f77_integer, ROW_MAJOR, IntentINOUT"); \
   BOOST_2D_TYPES_TO_TEST_CALLBACKS
 
 // #defines for internal types (these are not expected to be used as
 // input to NAG routines, but are leveraging some of the same tests)
 // (RawData<RT,inout> can potentially be used for local arrays, but
-// never with data_handling::ArgIntent::IN)
+// never with data_handling::ArgIntent::IntentIN)
 #define INTERNAL_TYPES_TO_TEST_WRAPPERS \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, OUT>, double, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, INOUT>, double, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, COL_MAJOR, OUT"); \
-  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, COL_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, OUT>, double, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, INOUT>, double, ROW_MAJOR, INOUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, OUT>, f77_integer, ROW_MAJOR, OUT"); \
-  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, INOUT>, f77_integer, ROW_MAJOR, INOUT");
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, IntentOUT>, double, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, double, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, IntentINOUT>, double, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, IntentOUT>, f77_integer, COL_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::COL_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, IntentINOUT>, f77_integer, COL_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, IntentOUT>, double, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, double, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<double, IntentINOUT>, double, ROW_MAJOR, IntentINOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, IntentOUT>, f77_integer, ROW_MAJOR, IntentOUT"); \
+  run_this<ut::SORDER::ROW_MAJOR, types::f77_integer, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL>("ut::RawData<f77_integer, IntentINOUT>, f77_integer, ROW_MAJOR, IntentINOUT");
 
 // #define used to set up tests for types valid in main wrappers
 #define DEFINE_RUN_METHOD_WRAPPERS \
@@ -1176,12 +1176,12 @@ template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent ino
 void pseudo_helper_in(const RT *x, const size_t n1_a, const size_t n2_a,
                       bool &meta_info_ok, RT &max_diff) {
   // pack raw data into utility::array2D
-  utility::array2D<RT, data_handling::ArgIntent::IN> local_x(
+  utility::array2D<RT, data_handling::ArgIntent::IntentIN> local_x(
     x, n1_a, n2_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array2D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    const utility::array2D<RT, data_handling::ArgIntent::IN>, inout, AC>(local_x);
+    const utility::array2D<RT, data_handling::ArgIntent::IntentIN>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input argument ...
   // check that the users type has the correct meta information
@@ -1201,12 +1201,12 @@ template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent ino
 void pseudo_helper_out(RT *x, const size_t n1_a, const size_t n2_a,
                        bool &meta_info_ok) {
   // pack raw data into utility::array2D
-  utility::array2D<RT, data_handling::ArgIntent::OUT> local_x(
+  utility::array2D<RT, data_handling::ArgIntent::IntentOUT> local_x(
     x, n1_a, n2_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array2D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array2D<RT, data_handling::ArgIntent::OUT>, inout, AC>(local_x);
+    utility::array2D<RT, data_handling::ArgIntent::IntentOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an output argument ...
   // check that the users type has the correct meta information
@@ -1223,12 +1223,12 @@ template <enum ut::SORDER sorder, typename RT, enum data_handling::ArgIntent ino
 void pseudo_helper_inout(RT *x, const size_t n1_a, const size_t n2_a,
                          bool &meta_info_ok, RT &max_diff) {
   // pack raw data into utility::array2D
-  utility::array2D<RT, data_handling::ArgIntent::INOUT> local_x(
+  utility::array2D<RT, data_handling::ArgIntent::IntentINOUT> local_x(
     x, n1_a, n2_a, ut::is_col_major<sorder>::value);
 
   // convert utility::array2D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array2D<RT, data_handling::ArgIntent::INOUT>, inout, AC>(local_x);
+    utility::array2D<RT, data_handling::ArgIntent::IntentINOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input / output argument ...
   // check that the users type has the correct meta information

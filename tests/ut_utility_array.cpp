@@ -49,7 +49,7 @@ struct test_array1D_element_get_const : public TestCase {
   void run() override {
     int n = 4;
     std::vector<int> dx = {1, 2, 3, 4};
-    utility::array1D<int, data_handling::ArgIntent::IN> v(dx.data(), n);
+    utility::array1D<int, data_handling::ArgIntent::IntentIN> v(dx.data(), n);
     ASSERT_EQUAL(v(0), 1);
     ASSERT_EQUAL(v(1), 2);
     ASSERT_EQUAL(v(2), 3);
@@ -177,7 +177,7 @@ struct test_array2D_element_get_const : public TestCase {
       int n1 = 5, n2 = 3;
       std::vector<int> dx = {11, 21, 31, 41, 51, 12, 22, 32,
                              42, 52, 13, 23, 33, 43, 53};
-      utility::array2D<int, data_handling::ArgIntent::IN> m(dx.data(), n1, n2,
+      utility::array2D<int, data_handling::ArgIntent::IntentIN> m(dx.data(), n1, n2,
                                                         true);
       ASSERT_EQUAL(m(0, 0), 11);
       ASSERT_EQUAL(m(1, 0), 21);
@@ -207,7 +207,7 @@ struct test_array2D_element_get_const : public TestCase {
       int n1 = 5, n2 = 3;
       std::vector<int> dx = {11, 12, 13, 21, 22, 23, 31, 32,
                              33, 41, 42, 43, 51, 52, 53};
-      utility::array2D<int, data_handling::ArgIntent::IN> m(dx.data(), n1, n2,
+      utility::array2D<int, data_handling::ArgIntent::IntentIN> m(dx.data(), n1, n2,
                                                         false);
       ASSERT_EQUAL(m(0, 0), 11);
       ASSERT_EQUAL(m(1, 0), 21);
@@ -382,7 +382,7 @@ struct test_array3D_element_get_const : public TestCase {
                              133,233,333,433,533,
                              143,243,343,443,543};
       // clang-format on
-      utility::array3D<int, data_handling::ArgIntent::IN> m(dx.data(), n1, n2, n3,
+      utility::array3D<int, data_handling::ArgIntent::IntentIN> m(dx.data(), n1, n2, n3,
                                                         true);
       ASSERT_EQUAL(m(0, 0, 0), 111);
       ASSERT_EQUAL(m(1, 0, 0), 211);
@@ -418,7 +418,7 @@ struct test_array3D_element_get_const : public TestCase {
                              411,412,413,421,422,423,431,432,433,441,442,443,
                              511,512,513,521,522,523,531,532,533,541,542,543};
       // clang-format on
-      utility::array3D<int, data_handling::ArgIntent::IN> m(dx.data(), n1, n2, n3,
+      utility::array3D<int, data_handling::ArgIntent::IntentIN> m(dx.data(), n1, n2, n3,
                                                         false);
       ASSERT_EQUAL(m(0, 0, 0), 111);
       ASSERT_EQUAL(m(1, 0, 0), 211);

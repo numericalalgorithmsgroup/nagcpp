@@ -54,16 +54,16 @@ namespace nagcpp {
     template <enum data_handling::ArgIntent inout, TYPE_IS type_is>
     struct index_operator_lhs : public std::true_type {};
     template <>
-    struct index_operator_lhs<data_handling::ArgIntent::IN, TYPE_IS::CONST_DATA_POINTER>
+    struct index_operator_lhs<data_handling::ArgIntent::IntentIN, TYPE_IS::CONST_DATA_POINTER>
       : public std::false_type {};
 
     template <enum data_handling::ArgIntent inout, TYPE_IS type_is>
     struct has_resize : public std::false_type {};
     template <>
-    struct has_resize<data_handling::ArgIntent::OUT, TYPE_IS::GENERAL>
+    struct has_resize<data_handling::ArgIntent::IntentOUT, TYPE_IS::GENERAL>
       : public std::true_type {};
     template <>
-    struct has_resize<data_handling::ArgIntent::INOUT, TYPE_IS::GENERAL>
+    struct has_resize<data_handling::ArgIntent::IntentINOUT, TYPE_IS::GENERAL>
       : public std::true_type {};
     // ... test combinations of input / output and TYPE_IS
 

@@ -81,7 +81,7 @@ using namespace nagcpp;
 
 // NB: this test suite runs:
 //   9 tests on types used in wrappers
-//      of which only 5 are run on data_handling::ArgIntent::IN classes
+//      of which only 5 are run on data_handling::ArgIntent::IntentIN classes
 //      (or internal ones) and (max of) 7 are run if ut::has_resize
 //      is false
 //   1 test on types used in callbacks
@@ -248,57 +248,57 @@ struct test_setup {
 // clang-format off
 // #defines for supported types
 #define SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::ArgIntent::IN, std::vector<double>>("std::vector<double>, double, IN"); \
-  run_this<double, data_handling::ArgIntent::OUT, std::vector<double>>("std::vector<double>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, std::vector<double>>("std::vector<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::IN, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, OUT");
+  run_this<double, data_handling::ArgIntent::IntentIN, std::vector<double>>("std::vector<double>, double, IntentIN"); \
+  run_this<double, data_handling::ArgIntent::IntentOUT, std::vector<double>>("std::vector<double>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, std::vector<double>>("std::vector<double>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IntentIN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, std::vector<types::f77_integer>>("std::vector<f77_integer>, f77_integer, IntentOUT");
 
 // NB: MyVector and MyData are supplied as samples of how to write a custom
 // data class that can be used by the NAG interfaces (see example directory)
 // the array1D_wrapper class is a wrapper around array1D
 #define SUPPORTED_TYPES_TO_TEST_WRAPPERS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::ArgIntent::IN, MyVector<double>>("MyVector<double>. double, IN"); \
-  run_this<double, data_handling::ArgIntent::OUT, MyVector<double>>("MyVector<double>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, MyVector<double>>("MyVector<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::IN, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, MyVector<types::f77_integer>>("MyVector<f77_integer> f77_integer, INOUT"); \
-  run_this<double, data_handling::ArgIntent::IN, MyData<double>>("MyData<double>, double, IN"); \
-  run_this<double, data_handling::ArgIntent::OUT, MyData<double>>("MyData<double>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, MyData<double>>("MyData<double>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::IN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, INOUT"); \
-  run_this<double, data_handling::ArgIntent::IN, ut::array1D_wrapper<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IN>, double, IN"); \
-  run_this<double, data_handling::ArgIntent::OUT, ut::array1D_wrapper<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, ut::array1D_wrapper<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::IN, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IN>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, INOUT>, f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentIN, MyVector<double>>("MyVector<double>. double, IntentIN"); \
+  run_this<double, data_handling::ArgIntent::IntentOUT, MyVector<double>>("MyVector<double>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, MyVector<double>>("MyVector<double>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, IntentIN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, MyVector<types::f77_integer>>("MyVector<f77_integer>, f77_integer, IntentOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, MyVector<types::f77_integer>>("MyVector<f77_integer> f77_integer, IntentINOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentIN, MyData<double>>("MyData<double>, double, IntentIN"); \
+  run_this<double, data_handling::ArgIntent::IntentOUT, MyData<double>>("MyData<double>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, MyData<double>>("MyData<double>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IntentIN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IntentOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, MyData<types::f77_integer>>("MyData<f77_integer>, f77_integer, IntentINOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentIN, ut::array1D_wrapper<double, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IntentIN>, double, IntentIN"); \
+  run_this<double, data_handling::ArgIntent::IntentOUT, ut::array1D_wrapper<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IntentOUT>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, ut::array1D_wrapper<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<double, IntentINOUT>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IntentIN>, f77_integer, IntentIN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IntentOUT>, f77_integer, IntentOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, ut::array1D_wrapper<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D_wrapper<f77_integer, IntentINOUT>, f77_integer, IntentINOUT"); \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS
 
 #define SUPPORTED_TYPES_TO_TEST_CALLBACKS \
   SUPPORTED_TYPES_TO_TEST_BOTH \
-  run_this<double, data_handling::ArgIntent::IN, utility::array1D<double, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, IN>, double, IN"); \
-  run_this<double, data_handling::ArgIntent::OUT, utility::array1D<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, utility::array1D<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::IN, utility::array1D<types::f77_integer, data_handling::ArgIntent::IN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, IN>, f77_integer, IN"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, INOUT>, f77_integer, INOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentIN, utility::array1D<double, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, IntentIN>, double, IntentIN"); \
+  run_this<double, data_handling::ArgIntent::IntentOUT, utility::array1D<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, IntentOUT>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, utility::array1D<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<double, IntentINOUT>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentIN, utility::array1D<types::f77_integer, data_handling::ArgIntent::IntentIN>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, IntentIN>, f77_integer, IntentIN"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, IntentOUT>, f77_integer, IntentOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, utility::array1D<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::CONST_DATA_POINTER>("ut::array1D<f77_integer, IntentINOUT>, f77_integer, IntentINOUT"); \
   BOOST_1D_TYPES_TO_TEST_WRAPPERS
 
 // #defines for internal types (these are not expected to be used as
 // input to NAG routines, but are leveraging some of the same tests)
 // (RawData<RT,inout> can potentially be used for local arrays, but
-// never with data_handling::ArgIntent::IN)
+// never with data_handling::ArgIntent::IntentIN)
 #define INTERNAL_TYPES_TO_TEST_WRAPPERS \
-  run_this<double, data_handling::ArgIntent::OUT, data_handling::RawData<double, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, OUT>, double, OUT"); \
-  run_this<double, data_handling::ArgIntent::INOUT, data_handling::RawData<double, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, INOUT>, double, INOUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::OUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::OUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, OUT>, f77_integer, OUT"); \
-  run_this<types::f77_integer, data_handling::ArgIntent::INOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::INOUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, INOUT>, f77_integer, INOUT");
+  run_this<double, data_handling::ArgIntent::IntentOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, IntentOUT>, double, IntentOUT"); \
+  run_this<double, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<double, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL> ("RawData<double, IntentINOUT>, double, IntentINOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentOUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, IntentOUT>, f77_integer, IntentOUT"); \
+  run_this<types::f77_integer, data_handling::ArgIntent::IntentINOUT, data_handling::RawData<types::f77_integer, data_handling::ArgIntent::IntentINOUT>, ut::TYPE_IS::INTERNAL> ("RawData<f77_integer, IntentINOUT>, f77_integer, IntentINOUT");
 
 // #define used to set up tests for types valid in main wrappers
 #define DEFINE_RUN_METHOD_WRAPPERS \
@@ -949,11 +949,11 @@ template <typename RT, enum data_handling::ArgIntent inout, typename AC,
 void pseudo_helper_in(const RT *x, const size_t n1, bool &meta_info_ok,
                       RT &max_diff) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::ArgIntent::IN> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::IntentIN> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    const utility::array1D<RT, data_handling::ArgIntent::IN>, inout, AC>(local_x);
+    const utility::array1D<RT, data_handling::ArgIntent::IntentIN>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input argument ...
   // check that the users type has the correct meta information
@@ -971,11 +971,11 @@ template <typename RT, enum data_handling::ArgIntent inout, typename AC,
           enum ut::TYPE_IS type_is = ut::TYPE_IS::GENERAL>
 void pseudo_helper_out(RT *x, const size_t n1, bool &meta_info_ok) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::ArgIntent::OUT> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::IntentOUT> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array1D<RT, data_handling::ArgIntent::OUT>, inout, AC>(local_x);
+    utility::array1D<RT, data_handling::ArgIntent::IntentOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an output argument ...
   // check that the users type has the correct meta information
@@ -992,11 +992,11 @@ template <typename RT, enum data_handling::ArgIntent inout, typename AC,
 void pseudo_helper_inout(RT *x, const size_t n1, bool &meta_info_ok,
                          RT &max_diff) {
   // pack raw data into utility::array1D
-  utility::array1D<RT, data_handling::ArgIntent::INOUT> local_x(x, n1);
+  utility::array1D<RT, data_handling::ArgIntent::IntentINOUT> local_x(x, n1);
 
   // convert utility::array1D into the users type
   auto user_x = data_handling::convert_nag_array_to_user<
-    utility::array1D<RT, data_handling::ArgIntent::INOUT>, inout, AC>(local_x);
+    utility::array1D<RT, data_handling::ArgIntent::IntentINOUT>, inout, AC>(local_x);
 
   // simulate calling a callback with X as an input / output argument ...
   // check that the users type has the correct meta information

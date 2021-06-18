@@ -136,15 +136,15 @@ struct test_simple_example : public TestCase {
       ASSERT_EQUAL(opt_rm.get_mnstep(), nstep_cm);
     }
 
-    utility::array2D<double, data_handling::ArgIntent::IN> d_rm(rd_rm.data(), n, m,
+    utility::array2D<double, data_handling::ArgIntent::IntentIN> d_rm(rd_rm.data(), n, m,
                                                             false);
 
     // preallocate some more output arrays
     std::vector<double> ib_rm((nstep_cm + 2) * ip_cm);
-    utility::array2D<double, data_handling::ArgIntent::OUT> b_rm(
+    utility::array2D<double, data_handling::ArgIntent::IntentOUT> b_rm(
       ib_rm.data(), ip_cm, nstep_cm + 2, false);
     std::vector<double> ifitsum_rm((nstep_cm + 1) * 6);
-    utility::array2D<double, data_handling::ArgIntent::OUT> fitsum_rm(
+    utility::array2D<double, data_handling::ArgIntent::IntentOUT> fitsum_rm(
       ifitsum_rm.data(), 6, nstep_cm + 1, false);
     nagcpp::types::f77_integer ip_rm, nstep_rm;
 

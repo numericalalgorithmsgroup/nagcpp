@@ -10,33 +10,33 @@
 namespace nagcpp {
   namespace data_handling {
     // enum used only for specializing transformation templates
-    enum ArgIntent { IN, OUT, INOUT };
+    enum ArgIntent { IntentIN, IntentOUT, IntentINOUT };
 
     // test value of the INOUT enum ...
     template <enum ArgIntent inout>
     struct is_in : public std::false_type {};
     template <>
-    struct is_in<IN> : public std::true_type {};
+    struct is_in<IntentIN> : public std::true_type {};
     template <enum ArgIntent inout>
     struct is_out : public std::false_type {};
     template <>
-    struct is_out<OUT> : public std::true_type {};
+    struct is_out<IntentOUT> : public std::true_type {};
     template <enum ArgIntent inout>
     struct is_inout : public std::false_type {};
     template <>
-    struct is_inout<INOUT> : public std::true_type {};
+    struct is_inout<IntentINOUT> : public std::true_type {};
     // ... test value of the INOUT enum
 
-    // if inout = data_handling::IN, then add const to RT ...
+    // if inout = data_handling::IntentIN, then add const to RT ...
     template <typename RT, enum ArgIntent inout>
     struct add_const_if_in {
       typedef RT type;
     };
     template <typename RT>
-    struct add_const_if_in<RT, IN> {
+    struct add_const_if_in<RT, IntentIN> {
       typedef const RT type;
     };
-    // ... if inout = data_handling::IN, then add const to RT
+    // ... if inout = data_handling::IntentIN, then add const to RT
 
     // convert boolean flag indicating column major storage
     // order to numeric value used in engine

@@ -137,11 +137,11 @@ struct convert_nag_array_to_user_t<utility::array1D<RT, inout>, inout,
 ;
 
 template <typename RT>
-struct convert_nag_array_to_user_t<const utility::array1D<RT, IN>, IN,
+struct convert_nag_array_to_user_t<const utility::array1D<RT, IntentIN>, IntentIN,
                                    boost::numeric::ublas::vector<RT>> {
-  static const nag_1D_array_to_boost_vector<RT, IN>
-    get(const utility::array1D<RT, IN> &nag_array) {
-    return nag_1D_array_to_boost_vector<RT, IN>(nag_array);
+  static const nag_1D_array_to_boost_vector<RT, IntentIN>
+    get(const utility::array1D<RT, IntentIN> &nag_array) {
+    return nag_1D_array_to_boost_vector<RT, IntentIN>(nag_array);
   }
 };
 // ... handle conversion of NAG array to boost::numeric::ublas::vector
