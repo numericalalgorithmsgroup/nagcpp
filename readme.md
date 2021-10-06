@@ -1,10 +1,10 @@
 # C++11 Interfaces for the NAG Library
 
-This is version 27.2.1.0 of a set of C++11 interfaces for the NAG Library,
+This is version 27.3.0.0 of a set of C++11 interfaces for the NAG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of
-[Mark 27.2 of the NAG Library](https://www.nag.com/content/nag-library)
+[Mark 27.3 of the NAG Library](https://www.nag.com/content/nag-library)
 installed on your system.
 
 Currently only interfaces for a small subset of routines from the NAG Library
@@ -57,4 +57,4 @@ https://www.nag.com/content/nag-library-mark-27).
 ## Full Documentation for the C++11 Interfaces
 
 A more comprehensive set of documentation is available from the NAG website:
-https://www.nag.com/numeric/nl/nagdoc_27.2/cpphtml/frontmatter/manconts.html
+https://www.nag.com/numeric/nl/nagdoc_27.3/cpphtml/frontmatter/manconts.html

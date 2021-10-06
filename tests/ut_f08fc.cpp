@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <vector>
 
 #include "../examples/include/nag_my_matrix.hpp"

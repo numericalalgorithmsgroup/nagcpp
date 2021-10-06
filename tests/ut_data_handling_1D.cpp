@@ -1,4 +1,5 @@
 // unit tests for 1D classes that may be passed into a NAG routine
+#include <cstddef>
 #include "../examples/include/nag_my_data.hpp"
 #include "../examples/include/nag_my_vector.hpp"
 #include "include/cxxunit_testing.hpp"

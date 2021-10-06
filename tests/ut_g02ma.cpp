@@ -1,3 +1,4 @@
+#include <cstddef>
 #include "../examples/include/nag_my_matrix.hpp"
 #include "g02/nagcpp_g02ma.hpp"
 #include "include/cxxunit_testing.hpp"

@@ -258,3 +258,4 @@ else
   echo "All tests PASSED" >> ${tmpfile}
 fi
 LOGGER ${tmpfile} "${RUN_LOG_STYLE}" "${RUN_LOG_FILE}"
+exit ${failed}

@@ -49,17 +49,17 @@ NAMEEXE := -o # comment to preserve trailing space
 
 USE_VS ?= 0
 ifeq ($(PLATOS),"WINDOWS")
-  ifeq ($(IS_CYGWIN),1)
-    NAGLIB_CXX := $(SCRIPTS_DIR)/win_icl
+  HAVE_ICL := $(shell which icl.exe | wc -l)
+  ifeq ($(HAVE_ICL),0)
+    USE_VS = 1
+  endif
+  ifeq ($(USE_VS),1)
+    NAGLIB_CXX := cl.exe
+    LINK_EXE = link.exe
+    LINK_FLAGS += /nodefaultlib:ifconsol.lib /nodefaultlib:ifmodintr.lib /nodefaultlib:libifcoremd.lib /nodefaultlib:libifportmd.lib /nodefaultlib:ifwin.lib
   else
-    HAVE_ICL := $(shell which icl.exe | wc -l)
-    ifeq ($(HAVE_ICL),0)
-      USE_VS = 1
-    endif
-    ifeq ($(USE_VS),1)
-      NAGLIB_CXX := cl.exe
-      LINK_EXE = link.exe
-      LINK_FLAGS += /nodefaultlib:ifconsol.lib /nodefaultlib:ifmodintr.lib /nodefaultlib:libifcoremd.lib /nodefaultlib:libifportmd.lib /nodefaultlib:ifwin.lib
+    ifeq ($(IS_CYGWIN),1)
+      NAGLIB_CXX := $(SCRIPTS_DIR)/win_icl
     else
       NAGLIB_CXX := icl.exe
     endif
@@ -134,11 +134,11 @@ endif
 $(notdir $(ALL_OBJ)) : %$(OBJ_EXT) : $(OBJ_DIR)/%$(OBJ_EXT)
 $(notdir $(ALL_EXE)) : %$(EXE_EXT) : $(EXE_DIR)/%$(EXE_EXT)
 
-$(ALL_OBJ) : $(OBJ_DIR)/%$(OBJ_EXT) : %$(CPP_EXT) check_env
+$(ALL_OBJ) : $(OBJ_DIR)/%$(OBJ_EXT) : %$(CPP_EXT)
 	@mkdir -p $(OBJ_DIR)
 	$(ECHO) ${NAGLIB_CXX} ${NAGLIB_CXXFLAGS} $(ADDITIONAL_CXXFLAGS) ${NAGLIB_INCLUDE} -I $(HEADERS_DIR) $< -c $(NAMEOBJ)$(OBJ_DIR)/$(@F)
 
-$(ALL_EXE) : $(EXE_DIR)/%$(EXE_EXT) : $(OBJ_DIR)/%$(OBJ_EXT) check_env
+$(ALL_EXE) : $(EXE_DIR)/%$(EXE_EXT) : $(OBJ_DIR)/%$(OBJ_EXT)
 	@mkdir -p $(EXE_DIR)
 	$(ECHO) $(LINK_EXE) $(LINK_FLAGS) ${NAGLIB_INCLUDE} $< ${NAGLIB_LINK} $(NAMEEXE)$(EXE_DIR)/$(@F)
 

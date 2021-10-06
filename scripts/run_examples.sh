@@ -180,3 +180,5 @@ else
   echo "Results files can be found in ${tmpdir}"
   echo "and make log file can be found in ${tmpfile}"
 fi
+
+exit ${failed}

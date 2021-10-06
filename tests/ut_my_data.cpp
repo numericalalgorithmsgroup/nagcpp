@@ -3,6 +3,7 @@
 // generic ut_data_handling_1D.cpp etc
 
 // we only test double, code is the same for all
+#include <cstddef>
 #include "../examples/include/nag_my_data.hpp"
 #include "../examples/include/nag_my_matrix.hpp"
 #include "../examples/include/nag_my_table.hpp"

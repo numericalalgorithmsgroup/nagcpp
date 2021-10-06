@@ -1,3 +1,4 @@
+#include <cstddef>
 #include "d01/nagcpp_d01fb.hpp"
 #include "d01/nagcpp_d01tb.hpp"
 #include "include/cxxunit_testing.hpp"
