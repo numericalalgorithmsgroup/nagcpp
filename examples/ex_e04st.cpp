@@ -44,8 +44,7 @@ void congrd(const std::vector<double> &x,
 }
 void hess(const std::vector<double> &x, const nagcpp::types::f77_integer idf,
           const double sigma, const std::vector<double> &lamda,
-          const nagcpp::types::f77_integer nnzh, std::vector<double> &hx,
-          nagcpp::types::f77_integer inform) {
+          std::vector<double> &hx, nagcpp::types::f77_integer inform) {
   bool terminate = true;
   std::fill(hx.begin(), hx.end(), 0.0);
 
@@ -183,7 +182,7 @@ int main(void) {
     //        number linear constraints + number non-linear constraints)
     nagcpp::types::f77_integer nnzu =
       2 * nvar + 2 * linbl.size() + 2 * nlnbl.size();
-    std::vector<double> u;
+    std::vector<double> u(nnzu);
     std::vector<double> rinfo;
     std::vector<double> stats;
 
@@ -196,7 +195,7 @@ int main(void) {
 
     // call the solver
     handle_solve_ipopt(handle, nullptr, nullptr, confun, congrd, hess, nullptr,
-                       x, nnzu, u, rinfo, stats, opt);
+                       x, u, rinfo, stats, opt);
     if (opt.fail.warning_thrown) {
       std::cout << std::endl << opt.fail.msg << std::endl << std::endl;
     }
