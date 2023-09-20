@@ -73,10 +73,10 @@ ifeq ($(PLATOS),"WINDOWS")
     NAMEEXE := /OUT:
   else
     NAMEEXE := -Fe:
-    NAGLIB_LINK += /Qstd=c++11
+    NAGLIB_LINK += /Qstd=c++17
   endif
 else
-  ADDITIONAL_CXXFLAGS += -std=c++11
+  ADDITIONAL_CXXFLAGS += -std=c++17
 endif
 
 LINK_EXE ?= $(NAGLIB_CXX)

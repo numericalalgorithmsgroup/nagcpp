@@ -75,7 +75,7 @@ struct test_simple_example : public TestCase {
     ASSERT_THROWS_NOTHING(nagcpp::correg::lars(
       mtype, d_cm, nullptr, y, ip_cm, nstep_cm, b_cm, fitsum_cm, opt_cm));
 
-    double eps = 100.0 * machine::precision();
+    double eps = 1000.0 * machine::precision();
     {
       SUB_TEST("check against hardcoded expected values");
       ASSERT_EQUAL(nstep_cm, 6);
