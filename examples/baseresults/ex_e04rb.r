@@ -20,7 +20,8 @@ nagcpp::opt::handle_solve_socp_ipm Example
      Socp Scaling                  =                None     * d                
      Socp Stop Tolerance           =         1.05367E-08     * d                
      Socp Stop Tolerance 2         =         1.05367E-08     * d                
-     Socp System Formulation       =                Auto     * d                
+     Socp System Formulation       =    Augmented System     * d                
+     Socp Factorization Method     =                Ma86     * d                
  End of Options                                                                 
                                                                                 
  Status: converged, an optimal solution found                                   
