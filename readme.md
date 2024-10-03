@@ -1,10 +1,10 @@
 # C++ Interfaces for the NAG Library
 
-This is version 30.1.0.0 of a set of C++ interfaces for the NAG Library,
+This is version 30.2.0.0 of a set of C++ interfaces for the NAG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of
-[Mark 30.1 of the NAG Library](https://www.nag.com/content/nag-library)
+[Mark 30.2 of the NAG Library](https://www.nag.com/content/nag-library)
 installed on your system.
 
 Currently only interfaces for a small subset of routines from the NAG Library
@@ -57,4 +57,4 @@ https://support.nag.com/content/nagr-library-mark-30).
 ## Full Documentation for the C++ Interfaces
 
 A more comprehensive set of documentation is available from the NAG website:
-https://support.nag.com/numeric/nl/nagdoc_30.1/cpphtml/frontmatter/manconts.html
+https://support.nag.com/numeric/nl/nagdoc_30.2/cpphtml/frontmatter/manconts.html
