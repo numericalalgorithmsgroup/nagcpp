@@ -15,7 +15,7 @@ the process out across the whole library.
 ## Quick Start
 
 Please visit the
-[NAG Library for C++ landing page](https://www.nag.com/content/nag-library-c-plusplus)
+[NAG Library for C++ intro page](https://support.nag.com/numeric/nl/nagdoc_latest/cpphtml/genint/cppintro.html)
 for quick-start information and more details on the examples supplied in the
 distribution.
 
