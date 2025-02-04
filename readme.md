@@ -1,13 +1,13 @@
-# C++ Interfaces for the NAG Library
+# C++ Interfaces for the *n*AG Library
 
-This is version 30.3.0.0 of a set of C++ interfaces for the NAG Library,
+This is version 30.3.0.0 of a set of C++ interfaces for the *n*AG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of
-[Mark 30.3 of the NAG Library](https://www.nag.com/content/nag-library)
+[Mark 30.3 of the *n*AG Library](https://www.nag.com/content/nag-library)
 installed on your system.
 
-Currently only interfaces for a small subset of routines from the NAG Library
+Currently, only interfaces for a small subset of routines from the *n*AG Library
 are available in this form. These interfaces are automatically generated, and
 their primary purpose is to elicit feedback on their design prior to rolling
 the process out across the whole library.
@@ -15,7 +15,7 @@ the process out across the whole library.
 ## Quick Start
 
 Please visit the
-[NAG Library for C++ landing page](https://www.nag.com/content/nag-library-c-plusplus)
+[*n*AG Library for C++ landing page](https://support.nag.com/numeric/nl/nagdoc_latest/cpphtml/genint/cppintro.html)
 for quick-start information and more details on the examples supplied in the
 distribution.
 
@@ -56,5 +56,5 @@ https://support.nag.com/content/nagr-library-mark-30).
 
 ## Full Documentation for the C++ Interfaces
 
-A more comprehensive set of documentation is available from the NAG website:
+A more comprehensive set of documentation is available from the *n*AG website:
 https://support.nag.com/numeric/nl/nagdoc_30.3/cpphtml/frontmatter/manconts.html
