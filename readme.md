@@ -1,13 +1,13 @@
-# C++ Interfaces for the *n*AG Library
+# C++ Interfaces for the NAG Library
 
-This is version 30.3.0.0 of a set of C++ interfaces for the *n*AG Library,
+This is version 31.0.0.0 of a set of C++ interfaces for the NAG Library,
 supplied as a series of header files.
 
 In order to make use of this product you will need a copy of
-[Mark 30.3 of the *n*AG Library](https://www.nag.com/content/nag-library)
+[Mark 31.0 of the NAG Library](https://www.nag.com/content/nag-library)
 installed on your system.
 
-Currently, only interfaces for a small subset of routines from the *n*AG Library
+Currently only interfaces for a small subset of routines from the NAG Library
 are available in this form. These interfaces are automatically generated, and
 their primary purpose is to elicit feedback on their design prior to rolling
 the process out across the whole library.
@@ -15,7 +15,7 @@ the process out across the whole library.
 ## Quick Start
 
 Please visit the
-[*n*AG Library for C++ landing page](https://support.nag.com/numeric/nl/nagdoc_latest/cpphtml/genint/cppintro.html)
+[NAG Library for C++ landing page](https://www.nag.com/content/nag-library-c-plusplus)
 for quick-start information and more details on the examples supplied in the
 distribution.
 
@@ -52,9 +52,9 @@ the directory `[NAGCPP_INSTALL_DIR]/include` to the list of directories your
 compiler searches for header files in addition to using any compiler flags
 usually required by the NAG Library (as specified in the Users' Notes supplied
 with your version of the library and also available from the NAG website at
-https://support.nag.com/content/nagr-library-mark-30).
+https://support.nag.com/content/nagr-library-mark-31).
 
 ## Full Documentation for the C++ Interfaces
 
-A more comprehensive set of documentation is available from the *n*AG website:
-https://support.nag.com/numeric/nl/nagdoc_30.3/cpphtml/frontmatter/manconts.html
+A more comprehensive set of documentation is available from the NAG website:
+https://support.nag.com/numeric/nl/nagdoc_31/cpphtml/frontmatter/manconts.html
